@@ -19,7 +19,6 @@ import {
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode } from "state";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Register = () => {
   // get theme
@@ -27,9 +26,6 @@ const Register = () => {
 
   // we use this to navigate to screens
   const navigateTo = useNavigate();
-
-  // Resize if on phone
-  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   //get User from redux store
   const user = useSelector((state) => state.global.User);
@@ -87,8 +83,8 @@ const Register = () => {
 
   const styledPaper = {
     padding: 20,
-    height: "80vh",
-    width: "60vh",
+    height: "800px",
+    width: "500px",
     margin: "20px auto",
     borderRadius: "15px",
   };
@@ -132,7 +128,7 @@ const Register = () => {
                   gridTemplateColumns="repeat(4, minmax(0, 1ft))"
                   sx={{
                     "& > div": {
-                      gridColumn: isNonMobile ? undefined : "span 4",
+                      gridColumn: "span 4",
                     },
                   }}
                 >
