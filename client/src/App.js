@@ -6,6 +6,9 @@ import { themeSettings } from "theme";
 import Authenticate from "scenes/authenticate"
 import Home from "scenes/homePage";
 import Register from "scenes/register";
+import History from "scenes/history";
+import ParkingTag from "scenes/parkingTag";
+import Vehicles from "scenes/vehicles";
 
 function App() {
   
@@ -24,6 +27,9 @@ function App() {
             <Route path="/home" element= { <Home /> } />
             <Route path="/authenticate" element={ <Authenticate /> } />
             <Route path="/register" element= { <Register /> } />
+            <Route path="/history" element= { <History /> } />
+            <Route path="/parkingTag" element= { <ParkingTag /> } />
+            <Route path="/vehicles" element={ <Vehicles /> } /> 
           </Routes>
         </ThemeProvider>
         
