@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { themeSettings } from "theme";
-import Authenticate from "scenes/authenticate"
+import Login from "scenes/login"
 import Home from "scenes/homePage";
 import Register from "scenes/register";
 import History from "scenes/history";
@@ -23,9 +23,9 @@ function App() {
         <ThemeProvider theme={theme}>
         <CssBaseline />
           <Routes>
-            <Route path="/" element={ <Navigate to="/authenticate" />} />
+            <Route path="/" element={ <Navigate to="/login" />} />
             <Route path="/home" element= { <Home /> } />
-            <Route path="/authenticate" element={ <Authenticate /> } />
+            <Route path="/login" element={ <Login /> } />
             <Route path="/register" element= { <Register /> } />
             <Route path="/history" element= { <History /> } />
             <Route path="/parkingTag" element= { <ParkingTag /> } />
