@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-// Imports Parse
-import Parse from 'parse/dist/parse.min.js';
+
 // Imports redux
 import { configureStore } from '@reduxjs/toolkit';
 import globalReducer from "state";
 import { Provider } from 'react-redux';
-
-
 
 // Set up the redux store for access to it from anywhere
 const store = configureStore({

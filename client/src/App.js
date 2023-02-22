@@ -3,9 +3,8 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { themeSettings } from "theme";
-import Authenticate from "scenes/authenticate"
 import Register from "scenes/register";
-// import History from "scenes/history";
+import History from "scenes/history";
 import ParkingTag from "scenes/parkingTag";
 import Vehicles from "scenes/vehicles";
 import Home from './pages/Home';
@@ -32,7 +31,7 @@ function App() {
             <Route path= "/home" element={ <Home/> }/>
             <Route path= "/Messages" element={ <Messages/> }/>
             <Route path= "/Notification" element={ <Notification/> }/>
-            <Route path="/authenticate" element={ <Authenticate /> } />
+            <Route path="/login" element={ <Login /> } />
             <Route path="/register" element= { <Register /> } />
             {/* <Route path="/history" element= { <History /> } /> */}
             <Route path="/parkingTag" element= { <ParkingTag /> } />
