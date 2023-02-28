@@ -1,29 +1,12 @@
 import React from "react";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Parse from 'parse/dist/parse.min.js'
 
 const Home = () => {
   const navigate = useNavigate();
   // Signing the user out
-  const signOut = async function () {
-    try {
-      // Log out user
-      await Parse.User.logOut();
-      // Verify that user is logged out
-      
-      if (Parse.User.current() === null) {
-        alert('User has been logged out.')
-        navigate("/");
-      } else {
-        alert('user could not be logged out.')
-      }
-      return true;
-    } catch (error) {
-      alert(`Error! ${error.message}`)
-      return false;
-    }
-  }
+  
+  
 
   return (
     <div>
@@ -37,7 +20,7 @@ const Home = () => {
         }}
         variant="contained"
         type="submit"
-        onClick={signOut}
+        onClick={() => navigate('/')}
       >
         <Typography>Sign Out</Typography>
       </Button>

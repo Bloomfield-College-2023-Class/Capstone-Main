@@ -17,7 +17,8 @@ import {
   DarkModeOutlined,
   LightModeOutlined,
 } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
+import axios from "axios";
 import { setMode } from "state";
 
 const Register = () => {
@@ -27,49 +28,28 @@ const Register = () => {
   // we use this to navigate to screens
   const navigateTo = useNavigate();
 
-  //get User from redux store
-  const user = useSelector((state) => state.global.User);
-
   // set up dispatch
   const dispatch = useDispatch();
 
   // Handles the parse user registration and what not
 
-  const handleOnRegisterClick = (formValues) => {
-    // If password do not match then alert and return
-    if (formValues.password !== formValues.confirmPassword) {
-      alert("passwords do not match");
-    }
-
-    user.set("username", formValues.userName);
-    user.set("password", formValues.password);
-    user.set("email", formValues.email);
-    user.set("phoneNumber", formValues.phoneNumber);
-    user.set("firstName", formValues.firstName);
-    user.set("lastName", formValues.lastName);
-
-    user
-      .signUp()
-      .then(() => {
-        // If the sign up is successful then log them is them
-        user.set("username", formValues.userName);
-        user.set("password", formValues.password);
-        user
-          .logIn()
-          .then((user) => {
-            // If successful login then send them to the home page
-            navigateTo("/home");
-          })
-          .catch((error) => {
-            // Show alert regarding error
-            alert(error.message);
-          });
+  const handleOnRegisterClick = async (formValues) => {
+    try {
+      await axios.post('http://localhost:8000/users', {
+        firstName: formValues.firstName,
+        lastName: formValues.lastName, 
+        email: formValues.email, 
+        password: formValues.password, 
+        confirmPassword: formValues.confirmPassword, 
+        username: formValues.userName, 
+        phoneNumber: formValues.phoneNumber
       })
-      // show error
-      .catch((err) => alert(err.message));
-    // Initialize a new user based on the form values
-    // log user in and move him to the home page
-  };
+      console.log('navigateTo Called')
+      navigateTo('/login')
+    } catch (error) {
+      alert(error.message);
+    }
+  };  
 
   const initialFormValues = {
     userName: "",
@@ -91,7 +71,7 @@ const Register = () => {
 
   return (
     <Grid>
-      <Paper style={styledPaper} elevation="10">
+      <Paper style={styledPaper} elevation={10}>
         <IconButton onClick={() => dispatch(setMode())}>
           {/* Ternary operator for theme bellow */}
           {theme.palette.mode === "dark" ? (
@@ -100,7 +80,6 @@ const Register = () => {
             <LightModeOutlined sx={{ fontSize: "25px" }} />
           )}
         </IconButton>
-
         <Grid align="center">
           <Avatar>
             <PersonOutlined />
@@ -108,7 +87,6 @@ const Register = () => {
           <Typography variant="h3" marginTop={"15px"} marginBottom="20px">
             Register
           </Typography>
-
           <Formik
             onSubmit={handleOnRegisterClick}
             initialValues={initialFormValues}
