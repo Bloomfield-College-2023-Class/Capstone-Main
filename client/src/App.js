@@ -38,7 +38,6 @@ function App() {
             <Route path="/vehicles" element={ <Vehicles /> } /> 
           </Routes>
         </ThemeProvider>
-        
       </BrowserRouter>
     </div>
   );
