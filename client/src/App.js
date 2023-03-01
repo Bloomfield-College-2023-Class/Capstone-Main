@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Messages from'./pages/Messages';
 import Notification from './pages/Notification';
 import Navbar from "./Navbar";
+import Login from './scenes/login';
 
 function App() {
   
@@ -27,7 +28,7 @@ function App() {
         <CssBaseline />
         <Navbar/>
           <Routes>
-            <Route path="/" element={ <Navigate to="/authenticate" />} />
+            <Route path="/" element={ <Navigate to="/login" />} />
             <Route path= "/home" element={ <Home/> }/>
             <Route path= "/Messages" element={ <Messages/> }/>
             <Route path= "/Notification" element={ <Notification/> }/>

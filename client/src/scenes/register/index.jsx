@@ -35,7 +35,7 @@ const Register = () => {
 
   const handleOnRegisterClick = async (formValues) => {
     try {
-      await axios.post('http://localhost:8000/users', {
+      await axios.post('http://localhost:8080/users', {
         firstName: formValues.firstName,
         lastName: formValues.lastName, 
         email: formValues.email, 
@@ -44,7 +44,6 @@ const Register = () => {
         username: formValues.userName, 
         phoneNumber: formValues.phoneNumber
       })
-      console.log('navigateTo Called')
       navigateTo('/login')
     } catch (error) {
       alert(error.message);

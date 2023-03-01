@@ -76,25 +76,7 @@ export const Login = async (req, res) => {
     const name = user[0].firstName;
     const email = user[0].email;
 
-    //Set tokens
-    const accessToken = jwt.sign({ userID, name, email }, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "15s"
-    });
-    const refreshToken = jwt.sign({ userID, name, email }, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: "1d"
-    });
-
-    await User.update({ refreshToken: refreshToken }, {
-      where: {
-        userID: userID
-      }
-    })
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000
-    })
-    //msg: "successful login", 
-    res.json({ accessToken });
+    res.json({ msg: "success" });
   } catch (error) {
     res.status(404).json({ msg: "User not found" });
   }
@@ -112,6 +94,7 @@ export const Logout = async (req, res) => {
 
   if (!user[0]) return res.sendStatus(204);
   const username = user[0].username;
+
   await User.update(
     { refresh_Token: null },
     {

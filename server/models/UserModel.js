@@ -35,7 +35,7 @@ const User = db.define('users', {
     type: db.Sequelize.STRING,
     allowNull: false,
     unique: true
-  }
+  },
 });
 
 (async () => {
