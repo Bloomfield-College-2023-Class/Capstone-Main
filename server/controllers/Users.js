@@ -15,13 +15,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// Hash passwords
-//const salt = await bcrypt.genSalt();
-//const hashPassword = await bcrypt.hash(password, salt);
-
-// Hash passwords
-//const salt = await bcrypt.genSalt();
-//const hashPassword = await bcrypt.hash(password, salt);
 export const Register = async (req, res) => {
   // Get the fields that we are going to register
   const {
@@ -62,6 +55,7 @@ export const Register = async (req, res) => {
 
 export const Login = async (req, res) => {
   try {
+    //Get the user from db
     const user = await User.findAll({
       where: {
         username: req.body.username,
@@ -72,19 +66,18 @@ export const Login = async (req, res) => {
     const passwordMatch = await bcrypt.compare(req.body.password, user[0].psw);
     if (!passwordMatch) return res.status(400).json({ msg: "Wrong Password" });
 
-    const userID = user[0].userID;
-    const name = user[0].firstName;
-    const email = user[0].email;
+    // const userID = user[0].userID;
+    // const name = user[0].firstName;
+    // const email = user[0].email;
 
     res.json({ msg: "success" });
   } catch (error) {
+    //If user does not exists
     res.status(404).json({ msg: "User not found" });
   }
 };
 
 export const Logout = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.sendStatus(204);
 
   const user = await User.findAll({
     where: {
@@ -96,14 +89,11 @@ export const Logout = async (req, res) => {
   const username = user[0].username;
 
   await User.update(
-    { refresh_Token: null },
     {
       where: {
         username: username,
       },
     }
   );
-
-  res.clearCookie("refreshToken");
   return res.sendStatus(200);
 };

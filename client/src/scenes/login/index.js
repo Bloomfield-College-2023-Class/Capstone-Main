@@ -22,8 +22,8 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 
 const Login = () => {
-  //Here we grab the null (empty user) from the redux store and we log the user in/or register the user
 
+  //set the theme
   const theme = useTheme();
 
   const dispatch = useDispatch();
@@ -33,17 +33,21 @@ const Login = () => {
   // Password
   const [password, setPassword] = useState('');
 
+  //Get user from redux
+  
   // This is a hook that react provides so that we can use the history instance on react router and allow us to redirect users to pages.
   const navigateTo = useNavigate();
   // Get the user stored in the redux store which is null by default, this also allows us to get the user info anywhere in our website once it is logged in
 
   const handleLogin = async () => {
+    
     // Set the username and password for the user.
     try {
       await axios.post('http://localhost:8080/login', {
         username: userName,
         password: password,
       });
+      //Send the user to the homepage
       navigateTo('/home')
     } catch ( error ) {
       alert(error.message)
@@ -77,7 +81,6 @@ const Login = () => {
           <Typography variant="h3" marginTop={"15px"} mb="20px">
             Sign In
           </Typography>
-
           {/* Username field */}
           <TextField
             variant="filled"
