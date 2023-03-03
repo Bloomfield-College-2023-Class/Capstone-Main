@@ -16,12 +16,16 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMode } from "state";
+import { logout, setMode } from "state";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }) => {
   //Set the theme
   const theme = useTheme();
   const dispatch = useDispatch();
+
+  if (!isLoggedIn) {
+    return null;
+  }
 
   return (
     <Box>
@@ -61,7 +65,7 @@ const Navbar = () => {
           </Box>
           <Box sx={{ display: "flex", alignItems: "left" }}>
             {/* Logout button */}
-            <IconButton component={Link} to="/login">
+            <IconButton component={Link} to="/login" onClick={() => dispatch(logout())}>
               <Logout />
               Logout
             </IconButton>

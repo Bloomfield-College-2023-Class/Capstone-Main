@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 
-// Reusable header component so that we can now what page we are in
+// Reusable header component
 
 const Header = ({ tittle, subtittles }) => {
 

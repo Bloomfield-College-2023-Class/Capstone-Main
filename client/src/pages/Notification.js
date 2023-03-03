@@ -16,7 +16,7 @@ const Notification = () => {
 
   //Test array to get random msgs when button is clicked.
   const RandomMsgs = ["This is a test notification", "Bmw with a license plate rtx 328 it being towed!",
-   "Your car has been hit!","Snow! do not park in the back"];
+  "Your car has been hit!","Snow! do not park in the back"];
   const randomIndex = Math.floor(Math.random() * RandomMsgs.length);
   const randomString = RandomMsgs[randomIndex];
 

@@ -18,7 +18,8 @@ import {
   LightModeOutlined,
 } from "@mui/icons-material";
 import SpaceBetween from "components/SpaceBetween";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../state/index.js"
 import axios from "axios";
 
 const Login = () => {
@@ -33,14 +34,13 @@ const Login = () => {
   // Password
   const [password, setPassword] = useState('');
 
-  //Get user from redux
+
   
   // This is a hook that react provides so that we can use the history instance on react router and allow us to redirect users to pages.
   const navigateTo = useNavigate();
   // Get the user stored in the redux store which is null by default, this also allows us to get the user info anywhere in our website once it is logged in
 
   const handleLogin = async () => {
-    
     // Set the username and password for the user.
     try {
       await axios.post('http://localhost:8080/login', {
@@ -48,10 +48,11 @@ const Login = () => {
         password: password,
       });
       //Send the user to the homepage
-      navigateTo('/home')
+      navigateTo('/home');
     } catch ( error ) {
       alert(error.message)
     }
+    dispatch(login());
   };
 
   // Style of key value pairs
