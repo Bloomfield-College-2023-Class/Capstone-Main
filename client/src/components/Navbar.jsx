@@ -18,8 +18,6 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
 
-import { useContext } from "react";
-
 const Navbar = () => {
   //Set the theme
   const theme = useTheme();

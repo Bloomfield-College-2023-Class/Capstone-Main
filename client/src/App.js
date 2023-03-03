@@ -26,10 +26,10 @@ function App() {
           <CssBaseline />
 
           <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<Navbar/>}>
-            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/home" element={<Home />} />
             <Route path="/Messages" element={<Messages />} />
             <Route path="/Notification" element={<Notification />} />
@@ -37,7 +37,6 @@ function App() {
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
             </Route>
-            
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
