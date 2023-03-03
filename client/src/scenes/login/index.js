@@ -18,7 +18,7 @@ import {
   LightModeOutlined,
 } from "@mui/icons-material";
 import SpaceBetween from "components/SpaceBetween";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../state/index.js"
 import axios from "axios";
 
@@ -48,11 +48,11 @@ const Login = () => {
         password: password,
       });
       //Send the user to the homepage
+      dispatch(login());
       navigateTo('/home');
     } catch ( error ) {
       alert(error.message)
     }
-    dispatch(login());
   };
 
   // Style of key value pairs
