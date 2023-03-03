@@ -24,7 +24,6 @@ function App() {
         {/* Give theme to MUI */}
         <ThemeProvider theme={theme}>
           <CssBaseline />
-
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
