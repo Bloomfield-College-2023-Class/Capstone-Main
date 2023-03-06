@@ -12,6 +12,7 @@ import Messages from "./pages/Messages";
 import Notification from "./pages/Notification";
 import Navbar from "./components/Navbar";
 import Login from "./scenes/login";
+import ProtectedRoute from "components/ProtectedRoute";
 
 function App() {
   //Gets theme mode either dark or light
@@ -30,12 +31,30 @@ function App() {
           <CssBaseline />
           <Navbar isLoggedIn={isLoggedIn}/>
           <Routes>
+
+            {/* There routes are unprotected because this is just register and login */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/notifications" element={<Notification />} />
+
+            {/* Home route is protected */}
+            <Route path="/home" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Home />
+              </ProtectedRoute>} />
+            
+            {/* Messages Route is Protected */}
+            <Route path="/messages" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Messages />
+              </ProtectedRoute>} />
+
+            {/* Notifications Route is Protected */}
+            <Route path="/notifications" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Notification />
+              </ProtectedRoute> } />
+          
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
           </Routes>

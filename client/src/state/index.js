@@ -10,6 +10,42 @@ const initialState = {
   },
   //Keeps track of logged in user
   isLoggedIn: false,
+
+  //Dummy data
+  ParkedCars: [{
+    carId: "car1",
+    parkingLotId: "lot1",
+    timeEntered: "11:00:00",
+    timeExited: "16:00:00"
+  }, 
+  {
+    carId: "car2",
+    parkingLotId: "lot2",
+    timeEntered: "16:00:00",
+    timeExited: "20:00:00"
+  }],
+  Tag: {
+    tagId: "blah",
+    userId: "Jose",
+    expiration: "2024-05-29",
+    effective: "2020-09-10"
+  },
+  Car: [{
+    carId: "car1",
+    userId: "user1",
+    license: "apvjnirep",
+    make: "toyota",
+    model: "carolla",
+    color: "gray",
+  },
+  {
+    carId: "car2",
+    userId: "user1",
+    license: "aprouns",
+    make: "Buick",
+    model: "Century",
+    color: "Black",
+  }]
 };
 
 export const globalSlice =  createSlice({
