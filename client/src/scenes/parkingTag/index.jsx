@@ -12,7 +12,7 @@ const ParkingTag = () => {
   const now = useState(DateTime.now());
 
   useEffect(() => {
-    if ((tag != " " && now > dateExpire) || (tag != " " && now < dateValid)) {
+    if ((tag !== " " && now > dateExpire) || (tag !== " " && now < dateValid)) {
       setValid(false);
     } else {
       setValid(true);

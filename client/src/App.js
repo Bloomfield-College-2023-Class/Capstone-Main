@@ -54,7 +54,6 @@ function App() {
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Notification />
               </ProtectedRoute> } />
-          
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
           </Routes>
