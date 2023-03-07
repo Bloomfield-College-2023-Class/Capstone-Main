@@ -19,7 +19,7 @@ import {
 } from "@mui/icons-material";
 import SpaceBetween from "components/SpaceBetween";
 import { useDispatch } from "react-redux";
-import { login } from "../../state/index.js"
+import { login, setUser } from "../../state/index.js"
 import axios from "axios";
 
 const Login = () => {
@@ -43,12 +43,13 @@ const Login = () => {
   const handleLogin = async () => {
     // Set the username and password for the user.
     try {
-      await axios.post('http://localhost:8080/login', {
+      const response = await axios.post('http://localhost:8080/login', {
         username: userName,
         password: password,
       });
       //Send the user to the homepage
       dispatch(login());
+      dispatch(setUser(response.data.user));
       navigateTo('/home');
     } catch ( error ) {
       alert(error.message)
@@ -119,7 +120,7 @@ const Login = () => {
             onClick={handleLogin}
           >
             <Typography>Sign In</Typography>
-          </Button>
+          </Button> 
         </Box>
         <SpaceBetween />
         <Box textAlign={"center"}>

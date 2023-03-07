@@ -5,11 +5,22 @@ import Moment from "react-moment";
 import { DateTime } from "luxon";
 
 const ParkingTag = () => {
-  const tag = useSelector((state) => state.global.Tag);
-  const [valid, setValid] = useState(true);
-  const dateValid = useState(DateTime.fromSQL(tag.effective));
-  const dateExpire = useState(DateTime.fromSQL(tag.expiration));
-  const now = useState(DateTime.now());
+    const tag = useSelector((state) => state.global.Tag)
+    const [valid, setValid] = useState(false)
+    const dateValid = tag ? DateTime.fromSQL(tag.effective) : null
+    const dateExpire = tag ? DateTime.fromSQL(tag.expiration) : null
+    const now = useState(DateTime.now())
+    
+    useEffect(() => {
+        if (tag)
+        {
+            if(tag != ' ' && now > dateExpire || tag != ' ' && now < dateValid) {
+                setValid(false);
+            } else {
+                setValid(true);
+            }
+        }
+    })
 
   useEffect(() => {
     if ((tag !== " " && now > dateExpire) || (tag !== " " && now < dateValid)) {

@@ -53,13 +53,16 @@ export const Register = async (req, res) => {
   }
 };
 
+
 export const Login = async (req, res) => {
   try {
+    console.log("hrmn")
     //Get the user from db
     const user = await User.findAll({
       where: {
         username: req.body.username,
       },
+      attributes: ["userID", "psw", "firstName", "lastName", "email", "phoneNumber", "username", "userType"]
     });
 
     //Verify Passwords
@@ -70,7 +73,10 @@ export const Login = async (req, res) => {
     // const name = user[0].firstName;
     // const email = user[0].email;
 
-    res.json({ msg: "success" });
+    const userObj = user[0].toJSON();
+    console.log(userObj)
+    const { userID, firstName, lastName, phoneNumber, email, userType, username } = userObj;
+    res.json({ msg: "success", user: { userID, firstName, lastName, phoneNumber, email, userType, username } });
   } catch (error) {
     //If user does not exists
     res.status(404).json({ msg: "User not found" });
@@ -96,4 +102,31 @@ export const Logout = async (req, res) => {
     }
   );
   return res.sendStatus(200);
+};
+
+// Update user information by userID
+export const updateUser = async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const { firstName, lastName, email, phoneNumber, password, username } = req.body;
+    let updatedUser = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber, 
+      username
+    };
+    if (password) {
+      const salt = await bcrypt.genSalt();
+      const hashPassword = await bcrypt.hash(password, salt);
+      updatedUser.psw = hashPassword;
+    }
+    const user = await User.findOne({ where: { userID } });
+    if (!user) return res.status(404).json({ msg: "User not found" });
+    await User.update(updatedUser, { where: { userID } });
+    return res.json({ msg: "User updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Failed to update user" });
+  }
 };

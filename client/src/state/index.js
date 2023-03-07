@@ -1,3 +1,4 @@
+import { Email } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
 
 //The initial state of the app will be dark mode
@@ -10,42 +11,17 @@ const initialState = {
   },
   //Keeps track of logged in user
   isLoggedIn: false,
-
-  //Dummy data
-  ParkedCars: [{
-    carId: "car1",
-    parkingLotId: "lot1",
-    timeEntered: "11:00:00",
-    timeExited: "16:00:00"
-  }, 
-  {
-    carId: "car2",
-    parkingLotId: "lot2",
-    timeEntered: "16:00:00",
-    timeExited: "20:00:00"
-  }],
-  Tag: {
-    tagId: "blah",
-    userId: "Jose",
-    expiration: "2024-05-29",
-    effective: "2020-09-10"
+  user: {
+    userID: 27,
+    userName: 'm',
+    firstName: 'm',
+    lastName: 'm',
+    phoneNumber: '3',
+    email: 'm',
+    userType: 's'
   },
-  Car: [{
-    carId: "car1",
-    userId: "user1",
-    license: "apvjnirep",
-    make: "toyota",
-    model: "carolla",
-    color: "gray",
-  },
-  {
-    carId: "car2",
-    userId: "user1",
-    license: "aprouns",
-    make: "Buick",
-    model: "Century",
-    color: "Black",
-  }]
+  parkedCars: [],
+  cars: []
 };
 
 export const globalSlice =  createSlice({
@@ -61,11 +37,23 @@ export const globalSlice =  createSlice({
     },
     logout: (state) => {
       state.isLoggedIn = false;
-    }
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    setCars: (state, action) => {
+      return {...state, cars: action.payload}
+    },
+    setParked: (state, action) => {
+      state.parkedCars = action.payload;
+    },
+    addParked: (state, action) => {
+      return {...state, parkedCars: action.payload}
+    },
   }
 })
 
 // We export variables and functions to have access to them outside the file
-export const { setMode, login, logout } = globalSlice.actions;
+export const { setCars, setParked, addParked, setMode, login, logout, setUser } = globalSlice.actions;
 
 export default globalSlice.reducer;

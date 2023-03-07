@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { themeSettings } from "theme";
 import Register from "scenes/register";
-//import History from "scenes/history";
+import History from "scenes/history";
 import ParkingTag from "scenes/parkingTag";
 import Vehicles from "scenes/vehicles";
 import Home from "./scenes/home";
@@ -13,6 +13,9 @@ import Notification from "./pages/Notification";
 import Navbar from "./components/Navbar";
 import Login from "./scenes/login";
 import ProtectedRoute from "components/ProtectedRoute";
+import PersonalInformation from "pages/personalInformation";
+import Settings from "pages/Settings"
+import Profile from "pages/Profile"
 
 function App() {
   //Gets theme mode either dark or light
@@ -54,8 +57,15 @@ function App() {
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Notification />
               </ProtectedRoute> } />
+            <Route path="/home" element={<Home />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/notifications" element={<Notification />} />
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
+            <Route path="/personalinformation" element={<PersonalInformation />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

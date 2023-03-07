@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   // Signing the user out
   
   const [Lot, setLot] = useState(0);
+  const user = useSelector((state) => state.global.user);
 
   // Function is called every time increment button is clicked
   function handleClick1() {
@@ -19,6 +21,7 @@ const Home = () => {
 
   return (
     <article>
+      <h1>Hello {user.firstName}</h1>
       <div className="row">
         {/* remove +2 and +3 just used for dummy data */}
         <div className="column">parking lot 1: {Lot} </div>
