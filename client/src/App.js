@@ -16,14 +16,15 @@ import ProtectedRoute from "components/ProtectedRoute";
 import PersonalInformation from "pages/personalInformation";
 import Settings from "pages/Settings"
 import Profile from "pages/Profile"
+import CreateNotification from "pages/CreateNotification";
 
 function App() {
   //Gets theme mode either dark or light
-  const mode = useSelector((state) => state.global.mode);
+  const mode = useSelector((state) => state.mode);
   //Sets the MUI theme
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
-  const isLoggedIn = useSelector((state) => state.global.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   console.log(isLoggedIn)
   // Bellow we will set up some routes
   return (
@@ -34,12 +35,11 @@ function App() {
           <CssBaseline />
           <Navbar isLoggedIn={isLoggedIn}/>
           <Routes>
-
             {/* There routes are unprotected because this is just register and login */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+            {/*<Route path={"/home"} element={<Home/> }/>*/}
             {/* Home route is protected */}
             <Route path="/home" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
@@ -53,10 +53,11 @@ function App() {
               </ProtectedRoute>} />
 
             {/* Notifications Route is Protected */}
-            <Route path="/notifications" element={
+            {/* <Route path="/notifications" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Notification />
-              </ProtectedRoute> } />
+              </ProtectedRoute> } /> */}
+            
             <Route path="/home" element={<Home />} />
             <Route path="/history" element={<History />} />
             <Route path="/messages" element={<Messages />} />
@@ -66,6 +67,7 @@ function App() {
             <Route path="/personalinformation" element={<PersonalInformation />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/createnotification" element={<CreateNotification />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

@@ -1,4 +1,3 @@
-import { Email } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
 
 //The initial state of the app will be dark mode

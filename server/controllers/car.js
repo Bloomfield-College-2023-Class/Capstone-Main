@@ -31,3 +31,24 @@ export const getCarsbyID = async(req, res) => {
         res.status(400).json({ msg: "something went wrong"})
     }
 }
+
+export const createCar = async (req, res) => {
+  try {
+    const { userID, licensePlate, make, model, color } = req.body;
+
+    // Create a new car instance and save it to the database
+    const newCar = await Car.create({
+      userID,
+      licensePlate,
+      make,
+      model,
+      color,
+    });
+
+    // Send a success response with the created car
+    res.status(201).json({ message: "Car created successfully", car: newCar });
+  } catch (error) {
+    // Send an error response with the error message
+    res.status(500).json({ message: "An error occurred: " + error.message });
+  }
+};
