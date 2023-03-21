@@ -27,8 +27,8 @@ function App() {
   //Sets the MUI theme
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
-  const isLoggedIn = useSelector((state) => state.global.isLoggedIn);
-  const user= useSelector((state) => state.global.user)
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  // const user= useSelector((state) => state.global.user)
   console.log(isLoggedIn)
   // Bellow we will set up some routes
   return (
@@ -45,10 +45,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             {/*<Route path={"/home"} element={<Home/> }/>*/}
             {/* Home route is protected */}
-            <Route path="/home" element={
+            {/* <Route path="/home" element={
               <HomeProtector isLoggedIn={isLoggedIn} user={user}>
                 <Home />
-              </HomeProtector>} />
+              </HomeProtector>} /> */}
             
             {/* Messages Route is Protected */}
             <Route path="/messages" element={
