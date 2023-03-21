@@ -19,10 +19,11 @@ import Profile from "pages/Profile"
 import Admin from "pages/Admin";
 import HomeProtector from "components/homeProtector";
 
+import CreateNotification from "pages/CreateNotification";
 
 function App() {
   //Gets theme mode either dark or light
-  const mode = useSelector((state) => state.global.mode);
+  const mode = useSelector((state) => state.mode);
   //Sets the MUI theme
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
@@ -38,12 +39,11 @@ function App() {
           <CssBaseline />
           <Navbar isLoggedIn={isLoggedIn}/>
           <Routes>
-
             {/* There routes are unprotected because this is just register and login */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+            {/*<Route path={"/home"} element={<Home/> }/>*/}
             {/* Home route is protected */}
             <Route path="/home" element={
               <HomeProtector isLoggedIn={isLoggedIn} user={user}>
@@ -57,10 +57,10 @@ function App() {
               </ProtectedRoute>} />
 
             {/* Notifications Route is Protected */}
-            <Route path="/notifications" element={
+            {/* <Route path="/notifications" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Notification />
-              </ProtectedRoute> } />
+            </ProtectedRoute> } />*/}
 
               <Route path="/history" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
@@ -107,6 +107,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/createnotification" element={<CreateNotification />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

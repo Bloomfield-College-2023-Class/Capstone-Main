@@ -8,21 +8,36 @@ import {
 } from "@mui/material";
 import {
   Home,
-  Notifications,
   Message,
+  Notifications,
   Logout,
-  DarkModeOutlined,
-  LightModeOutlined,
+  DarkMode,
   Settings,
+  LightMode,
+  AccountBox,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout, setMode } from "state";
+import axios from "axios";
+
+
+
 
 const Navbar = ({ isLoggedIn }) => {
   //Set the theme
   const theme = useTheme();
   const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/logout', { withCredentials: true });
+      console.log(response.data);
+      dispatch(logout())
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!isLoggedIn) {
     return null;
@@ -54,6 +69,12 @@ const Navbar = ({ isLoggedIn }) => {
               <Notifications />
               Notifications
             </IconButton>
+            {/* Profile */}
+            <IconButton color="inherit" component={Link} to="/profile" sx={{marginRight: '20px'}}>
+              <AccountBox />
+              Profile
+            </IconButton>
+            {/* Settings */}
             <IconButton color="inherit" component={Link} to="/settings" sx={{marginRight: '20px'}}>
               <Settings />
               Settings
@@ -62,15 +83,15 @@ const Navbar = ({ isLoggedIn }) => {
             <IconButton onClick={() => dispatch(setMode())}>
               {/* Ternary operator for theme bellow */}
               {theme.palette.mode === "dark" ? (
-                <DarkModeOutlined sx={{ fontSize: "25px" }} />
+                <DarkMode sx={{ fontSize: "25px" }} />
               ) : (
-                <LightModeOutlined sx={{ fontSize: "25px" }} />
+                <LightMode sx={{ fontSize: "25px" }} />
               )}
             </IconButton>
           </Box>
           <Box sx={{ display: "flex", alignItems: "left" }}>
             {/* Logout button */}
-            <IconButton component={Link} to="/login" onClick={() => dispatch(logout())}>
+            <IconButton component={Link} to="/login" onClick={handleLogout}>
               <Logout />
               Logout
             </IconButton>

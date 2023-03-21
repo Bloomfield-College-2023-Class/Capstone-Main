@@ -1,36 +1,61 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import {useSelector} from "react-redux";
+import {Grid, Typography} from "@mui/material";
+import PieChart from "../../components/PieChart";
 
 const Home = () => {
   // Signing the user out
-  
-  const [Lot, setLot] = useState(0);
-  const user = useSelector((state) => state.global.user);
+  const user = useSelector((state) => state.user);
 
-  // Function is called every time increment button is clicked
-  function handleClick1() {
-    // Counter state is incremented
-    setLot(Lot + 1);
-  }
-
-  // Function is called every time decrement button is clicked
-  function handleClick2() {
-    // Counter state is decremented
-    setLot(Lot - 1);
-  }
+  const data = [{
+    "id": "free",
+    "label": "Free",
+    "value": 80,
+    "color": "hsl(111, 70%, 50%)"
+  }, {
+    "id": "used",
+    "label": "Used",
+    "value": 20,
+    "color": "hsl(214, 70%, 50%)"
+  }]
 
   return (
-    <article>
-      <h1>Hello {user.firstName}</h1>
-      <div className="row">
-        {/* remove +2 and +3 just used for dummy data */}
-        <div className="column">parking lot 1: {Lot} </div>
-        <div className="column">parking lot 2: {Lot + 2} </div>
-        <div className="column">parking lot 3: {Lot + 3} </div>
-      </div>
-      <button onClick={handleClick1}>Increment</button>
-      <button onClick={handleClick2}>Decrement</button>
-    </article>
+    <div style={{flexGrow: 1, padding: '16px'}}>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Typography variant="h2" align="center" gutterBottom>
+            Welcome to Parking App, {user.firstName}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="h3" align="center" marginBottom={"50px"}>
+            Parking Lot Availability
+          </Typography>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            marginTop: '16px',
+          }}>
+            <div style={{textAlign: 'center', fontSize: "24px", width: "600px", height: "600px"}}>
+              Liberty Street
+              <PieChart data={data}/>
+            </div>
+
+            <div style={{textAlign: 'center', fontSize: "24px", width: "600px", height: "600px"}}>
+              Spruce Street
+              <PieChart data={data}/>
+            </div>
+
+            <div style={{textAlign: 'center', fontSize: "24px", width: "600px", height: "600px"}}>
+              College Hall
+              <PieChart data={data}/>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
