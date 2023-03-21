@@ -5,7 +5,6 @@ import { getByCar } from "../controllers/ParkedCars.js";
 import { createNotifications } from "../controllers/Notifications.js";
 import { getNotifications } from "../controllers/Notifications.js";
 import { deleteNotification } from "../controllers/Notifications.js";
-import { createCar } from "../controllers/car.js";
 
 const router = express.Router();
 
