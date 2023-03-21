@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 
 const PersonalInformation = () => {
-    const dispatch = useDispatch();
     const user = useSelector((state) => state.global.user);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
@@ -43,7 +42,6 @@ const PersonalInformation = () => {
             alert("passwords must match")
         }
     }
-  };
 
   return (
     <Container maxWidth="sm">
@@ -66,7 +64,7 @@ const PersonalInformation = () => {
         </Typography>
 
         <Typography variant="h6" mb={2}>
-          User Type: {userType}
+          User Type: {user.userType}
         </Typography>
 
         <TextField
