@@ -16,6 +16,9 @@ import ProtectedRoute from "components/ProtectedRoute";
 import PersonalInformation from "pages/personalInformation";
 import Settings from "pages/Settings"
 import Profile from "pages/Profile"
+import Admin from "pages/Admin";
+import HomeProtector from "components/homeProtector";
+
 
 function App() {
   //Gets theme mode either dark or light
@@ -24,6 +27,7 @@ function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   const isLoggedIn = useSelector((state) => state.global.isLoggedIn);
+  const user= useSelector((state) => state.global.user)
   console.log(isLoggedIn)
   // Bellow we will set up some routes
   return (
@@ -42,9 +46,9 @@ function App() {
 
             {/* Home route is protected */}
             <Route path="/home" element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <HomeProtector isLoggedIn={isLoggedIn} user={user}>
                 <Home />
-              </ProtectedRoute>} />
+              </HomeProtector>} />
             
             {/* Messages Route is Protected */}
             <Route path="/messages" element={
@@ -57,6 +61,42 @@ function App() {
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Notification />
               </ProtectedRoute> } />
+
+              <Route path="/history" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <History />
+              </ProtectedRoute> } />
+
+              <Route path="/parkingTag" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ParkingTag />
+              </ProtectedRoute> } />
+
+              <Route path="/vehicles" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Vehicles />
+              </ProtectedRoute> } />
+
+              <Route path="/personalinformation" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <PersonalInformation />
+              </ProtectedRoute> } />
+
+              <Route path="/settings" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Settings />
+              </ProtectedRoute> } />
+
+              <Route path="/profile" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Profile />
+              </ProtectedRoute> } />
+
+              <Route path="/admin" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Admin />
+              </ProtectedRoute> } />
+
             <Route path="/home" element={<Home />} />
             <Route path="/history" element={<History />} />
             <Route path="/messages" element={<Messages />} />
@@ -66,6 +106,7 @@ function App() {
             <Route path="/personalinformation" element={<PersonalInformation />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

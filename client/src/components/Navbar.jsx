@@ -13,6 +13,7 @@ import {
   Logout,
   DarkModeOutlined,
   LightModeOutlined,
+  Settings,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -52,6 +53,10 @@ const Navbar = ({ isLoggedIn }) => {
             <IconButton color="inherit" component={Link} to="/notifications" sx={{marginRight: '20px'}}>
               <Notifications />
               Notifications
+            </IconButton>
+            <IconButton color="inherit" component={Link} to="/settings" sx={{marginRight: '20px'}}>
+              <Settings />
+              Settings
             </IconButton>
             {/* Set the theme */}
             <IconButton onClick={() => dispatch(setMode())}>

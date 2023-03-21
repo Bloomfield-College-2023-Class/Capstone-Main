@@ -1,5 +1,5 @@
 import express from "express";
-import { getCars, getCarsbyID } from "../controllers/car.js";
+import { getCars, getCarsbyID, Import, updateCar } from "../controllers/car.js";
 import { getUsers, Register, Login, Logout, updateUser } from "../controllers/Users.js";
 import { getByCar } from "../controllers/ParkedCars.js";
 
@@ -13,6 +13,8 @@ router.delete('/logout', Logout);
 
 router.get('/getCars', getCars);
 router.post('/getCarsID', getCarsbyID);
+router.post('/import', Import);
+router.patch('/updateCar', updateCar);
 
 router.post('/parked', getByCar);
 

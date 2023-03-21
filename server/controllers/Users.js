@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: ["firstName", "lastName", "email", "phoneNumber", "username"],
+      attributes: ["firstName", "lastName", "email", "phoneNumber", "username", "userID", "userType"],
     });
     res.json(users);
   } catch (error) {
@@ -107,14 +107,16 @@ export const Logout = async (req, res) => {
 // Update user information by userID
 export const updateUser = async (req, res) => {
   try {
-    const { userID } = req.params;
-    const { firstName, lastName, email, phoneNumber, password, username } = req.body;
+    const { userID, firstName, lastName, email, phoneNumber, password, username, userType } = req.body;
     let updatedUser = {
+      userID,
       firstName,
       lastName,
       email,
       phoneNumber, 
-      username
+      username,
+      userType,
+      password
     };
     if (password) {
       const salt = await bcrypt.genSalt();

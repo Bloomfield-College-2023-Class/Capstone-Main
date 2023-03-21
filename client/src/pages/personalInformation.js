@@ -13,20 +13,22 @@ const PersonalInformation = () => {
     const [password2, setPassword2] = useState('');
     const [email, setEmail] = useState(user.email);
     const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-    const [userName, setUserName] = useState(user.userName);
-    const [userType] = useState(user.userType);
+    const [userName, setUserName] = useState(user.username);
 
     const updateUser = async () => {
         if (password == password2) {
             try {
                 const response = await axios.patch('http://localhost:8080/updateUser', {
                     username: userName,
+                    userID: user.userID,
                     password: password,
                     phoneNumber: phoneNumber,
                     email: email,
                     firstName: firstName,
-                    lastName: lastName
-                })
+                    lastName: lastName,
+                    userType: user.userType
+                }
+                )
                 alert("update successful")
             } catch (error) {
                 alert(error.message)
@@ -47,10 +49,11 @@ const PersonalInformation = () => {
                 className= "input" value={userName} onChange={(e) => setUserName(e.target.value)} />
 
                 <h2>User ID</h2>
-                <h2>{user.firstName}</h2>
+                <h2>{user.userID}</h2>
 
-                <h2>User Type</h2>
-                <h2>{userType}</h2>
+                <h2> First Name</h2>
+                <input type="text"
+                className= "input" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
                 <h2> First Name</h2>
                 <input type="text"
@@ -70,6 +73,9 @@ const PersonalInformation = () => {
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                 value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}>
                 </input>
+
+                <h2>user Type</h2>
+                <h2>{user.userType}</h2>
 
                 <h2>Password</h2>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
