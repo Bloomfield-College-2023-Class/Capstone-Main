@@ -2,99 +2,138 @@ import React, { useEffect, useCallback, useState, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCars } from "../../state/index.js"
 import axios from "axios";
-import { Container, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
+import { Container, Box, Typography, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, FormControl } from "@mui/material";
 
 const Vehicles = () => {
-    const dispatch = useDispatch();
-    const Car = useSelector((state) => state.cars)
-    const userID = useSelector((state) => state.user.userID)
+  const dispatch = useDispatch();
+  const Car = useSelector((state) => state.cars);
+  const userID = useSelector((state) => state.user.userID);
 
-    const [selectedCar, setSelectedCar] = useState('')
-    const [addCar, setAddCar] = useState(false);
-    const [ignored, forceUpdate] = useReducer(x => x+1, 0)
-    const [, updateState] = React.useState();
-    const forceUpdate2 = React.useCallback(() => updateState({}), []);
+  const [selectedCar, setSelectedCar] = useState("");
+  const [openForm, setOpenForm] = useState(false);
 
-    const fetchCars = useCallback(async () => {
-        try{
-            console.log(userID)
-            const response = await axios.post('http://localhost:8080/getCarsID', {
-                userID: userID
-            });
-            console.log(response)
-            dispatch(setCars(response.data))
-            console.log("end3", Car)
-        } catch (error) {
-            alert(error.message)
-        }
-    }, [userID, dispatch, Car])
-
-    const addCars = async () => {
-        try {
-            const response = await axios.post('http://localhost:8080/import',
-            {
-                userID: userID,
-                color: selectedCar.color,
-                make: selectedCar.make,
-                model: selectedCar.model,
-                licensePlate: selectedCar.licensePlate
-            })
-        } catch (error) {
-            alert(error.message);
-        }
+  const fetchCars = useCallback(async () => {
+    try {
+      console.log(userID);
+      const response = await axios.post("http://localhost:8080/getCarsID", {
+        userID: userID,
+      });
+      console.log(response);
+      dispatch(setCars(response.data));
+      console.log("end3", Car);
+    } catch (error) {
+      alert(error.message);
     }
+  }, [userID, dispatch]);
 
-    useEffect(() => {
-        if (userID) {
-            fetchCars();
-            console.log("end", Car)
-        }
-    }, [userID, fetchCars, Car])
+  const addCars = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/import", {
+        userID: userID,
+        color: selectedCar.color,
+        make: selectedCar.make,
+        model: selectedCar.model,
+        licensePlate: selectedCar.licensePlate,
+      });
+      setOpenForm(false);
+      fetchCars();
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
-    return(
+  useEffect(() => {
+    if (userID) {
+      fetchCars();
+      console.log("end", Car);
+    }
+  }, [userID, fetchCars]);
+
+    return (
       <Container maxWidth="md">
-      <Box my={4}>
-        <Typography variant="h4" mb={2}>
-          Vehicles
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>License</TableCell>
-                <TableCell>Make</TableCell>
-                <TableCell>Model</TableCell>
-                <TableCell>Color</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Car ? (
-                Car.map((x) => {
-                  return (
-                    <TableRow key={x.carId}>
-                      <TableCell>{x.licensePlate}</TableCell>
-                      <TableCell>{x.make}</TableCell>
-                      <TableCell>{x.model}</TableCell>
-                      <TableCell>{x.color}</TableCell>
-                    </TableRow>
-                  );
-                })
-              ) : (
+        <Box my={4}>
+          <Typography variant="h4" mb={2}>
+            Vehicles
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
                 <TableRow>
-                  <TableCell colSpan={4}>No cars</TableCell>
+                  <TableCell>License</TableCell>
+                  <TableCell>Make</TableCell>
+                  <TableCell>Model</TableCell>
+                  <TableCell>Color</TableCell>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Box mt={2}>
-          <Button variant="contained" color="primary" onClick={() => {}}>
-            Add Vehicle
-          </Button>
+              </TableHead>
+              <TableBody>
+                {Car ? (
+                  Car.map((x) => {
+                    return (
+                      <TableRow key={x.carId}>
+                        <TableCell>{x.licensePlate}</TableCell>
+                        <TableCell>{x.make}</TableCell>
+                        <TableCell>{x.model}</TableCell>
+                        <TableCell>{x.color}</TableCell>
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={4}>No cars</TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Box mt={2}>
+            <Button variant="contained" color="primary" onClick={() => setOpenForm(!openForm)}>
+              Add Vehicle
+            </Button>
+            {openForm && (
+              <Box mt={2}>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <TextField
+                    label="Make"
+                    variant="outlined"
+                    value={selectedCar.make}
+                    onChange={(e) => setSelectedCar({ ...selectedCar, make: e.target.value })}
+                  />
+                </FormControl>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <TextField
+                    label="Model"
+                    variant="outlined"
+                    value={selectedCar.model}
+                    onChange={(e) => setSelectedCar({ ...selectedCar, model: e.target.value })}
+                  />
+                </FormControl>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <TextField
+                    label="Color"
+                    variant="outlined"
+                    value={selectedCar.color}
+                    onChange={(e) => setSelectedCar({ ...selectedCar, color: e.target.value })}
+                  />
+                </FormControl>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <TextField
+                    label="License Plate"
+                    variant="outlined"
+                    value={selectedCar.licensePlate}
+                    onChange={(e) => setSelectedCar({ ...selectedCar, licensePlate: e.target.value })}
+                  />
+                </FormControl>
+                <Box mt={2}>
+                  <Button variant="contained" color="primary" onClick={addCars}>
+                    Submit
+                  </Button>
+                </Box>
+              </Box>
+            )}
+          </Box>
         </Box>
-      </Box>
-    </Container>
-    )
+      </Container>
+    );
 }
 
 export default Vehicles;

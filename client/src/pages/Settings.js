@@ -13,8 +13,8 @@ const Settings = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="h3" component="h1" gutterBottom>
-          SETTINGS
+        <Typography variant="h3" component="h1" gutterBottom my={3}>
+          Settings
         </Typography>
         <Button
           variant="contained"

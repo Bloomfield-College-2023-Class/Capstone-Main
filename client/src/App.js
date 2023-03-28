@@ -28,7 +28,10 @@ function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  // const user= useSelector((state) => state.global.user)
+
+  const user = useSelector((state) => state.user)
+
+  console.log(user)
   console.log(isLoggedIn)
   // Bellow we will set up some routes
   return (
