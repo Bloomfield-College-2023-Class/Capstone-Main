@@ -1,5 +1,4 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes/index.js";
 import session from "express-session";
@@ -16,7 +15,6 @@ const store = new SequelizeStore({
 //initialize the store
 store.sync();
 
-dotenv.config();
 const app = express();
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
