@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ParkingTagPage = () => {
   const [licensePlate, setLicensePlate] = useState('');
   const [duration, setDuration] = useState(1);
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();

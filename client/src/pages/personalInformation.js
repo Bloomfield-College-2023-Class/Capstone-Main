@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 const PersonalInformation = () => {
-    const user = useSelector((state) => state.global.user);
+    const user = useSelector((state) => state.user);
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [password, setPassword] = useState(user.password);
