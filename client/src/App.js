@@ -17,8 +17,8 @@ import PersonalInformation from "pages/personalInformation";
 import Settings from "pages/Settings"
 import Profile from "pages/Profile"
 import Admin from "pages/Admin";
+import parkingActions from "pages/parkingActions";
 import HomeProtector from "components/homeProtector";
-
 import CreateNotification from "pages/CreateNotification";
 
 function App() {
@@ -100,6 +100,11 @@ function App() {
                 <Admin />
               </ProtectedRoute> } />
 
+              <Route path="/parkingActions" element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <parkingActions/>
+              </ProtectedRoute> } />
+
             <Route path="/home" element={<Home />} />
             <Route path="/history" element={<History />} />
             <Route path="/messages" element={<Messages />} />
@@ -111,6 +116,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/createnotification" element={<CreateNotification />} />
+            <Route path ="/parkingActions" element={<parkingActions />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

@@ -26,7 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "run-aws-build" : "sudo NODE_OPTIONS='--max-old-space-size=1024' npm run build --no-progress"
+    "run-aws-build": "sudo NODE_OPTIONS='--max-old-space-size=1024' npm run build --no-progress"
   },
   "browserslist": {
     "production": [
