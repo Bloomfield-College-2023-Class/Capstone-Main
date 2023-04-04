@@ -48,10 +48,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             {/*<Route path={"/home"} element={<Home/> }/>*/}
             {/* Home route is protected */}
-            {/* <Route path="/home" element={
+             <Route path="/home" element={
               <HomeProtector isLoggedIn={isLoggedIn} user={user}>
                 <Home />
-              </HomeProtector>} /> */}
+              </HomeProtector>} /> 
             
             {/* Messages Route is Protected */}
             <Route path="/messages" element={
