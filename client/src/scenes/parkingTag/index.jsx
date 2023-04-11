@@ -18,7 +18,7 @@ const ParkingTag = () => {
 
   const addVehicle = async () => {
     try {
-      await axios.post("${BASE_URL}/addCar", {
+      await axios.post(`${BASE_URL}/addCar`, {
         userID: userID,
         licensePlate: licensePlate,
         make: make,

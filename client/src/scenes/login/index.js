@@ -44,7 +44,7 @@ const Login = () => {
   const handleLogin = async () => {
     // Set the username and password for the user.
     try {
-      const response = await axios.post('${BASE_URL}/login', {
+      const response = await axios.post(`${BASE_URL}/login`, {
         username: userName,
         password: password,
       });

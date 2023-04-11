@@ -27,7 +27,7 @@ const Admin = () => {
 
     const fillUsers = async () => {
         try {
-            const response = await axios.get("${BASE_URL}/users");
+            const response = await axios.get(`${BASE_URL}/users`);
             setUsers(response.data);
         } catch (error) {
             alert(error.message);
@@ -36,7 +36,7 @@ const Admin = () => {
 
     const fillCars = async () => {
         try {
-            const response = await axios.get("${BASE_URL}/getCars");
+            const response = await axios.get(`${BASE_URL}/getCars`);
             setCarList(response.data);
         } catch (error) {
             alert(error.message);
@@ -81,7 +81,7 @@ const Admin = () => {
 
     const updateUser = async () => {
         try {
-            const response = await axios.patch('${BASE_URL}/updateUser', {
+            const response = await axios.patch(`${BASE_URL}/updateUser`, {
                 username: selectedUser.userName,
                 userID: selectedUser.userID,
                 phoneNumber: selectedUser.phoneNumber,
@@ -98,7 +98,7 @@ const Admin = () => {
 
     const updateCar = async () => {
         try {
-            const response = await axios.patch('${BASE_URL}/updateCar', {
+            const response = await axios.patch(`${BASE_URL}/updateCar`, {
                 carID: selectedCar.carID,
                 userID: selectedCar.userID,
                 color: selectedCar.color,
@@ -114,7 +114,7 @@ const Admin = () => {
 
     const updateLots = async () => {
         try {
-            const response = await axios.patch('${BASE_URL}/updateCar', {
+            const response = await axios.patch(`${BASE_URL}/updateCar`, {
                 
             })
             alert("update successful")
@@ -125,7 +125,7 @@ const Admin = () => {
 
     const updateParked = async () => {
         try {
-            const response = await axios.patch('${BASE_URL}/updateCar', {
+            const response = await axios.patch(`${BASE_URL}/updateCar`, {
                 
             })
             alert("update successful")
@@ -136,7 +136,7 @@ const Admin = () => {
 
     const updateNots = async () => {
         try {
-            const response = await axios.patch('${BASE_URL}/updateCar', {
+            const response = await axios.patch(`${BASE_URL}/updateCar`, {
                 
             })
             alert("update successful")
@@ -147,7 +147,7 @@ const Admin = () => {
 
     const updateTags = async () => {
         try {
-            const response = await axios.patch('${BASE_URL}/updateCar', {
+            const response = await axios.patch(`${BASE_URL}/updateCar`, {
                 
             })
             alert("update successful")
@@ -241,7 +241,7 @@ const Admin = () => {
                             </Table>
                         </TableContainer>
                         {selectedUser ?
-                        <TableContainer>
+                        <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
@@ -343,6 +343,7 @@ const Admin = () => {
             {isCarsOpen ? (
 
             <Box my="4">
+                <TableContainer component={Paper}>
                 <Table>
                 <TableHead>
                     <TableRow>
@@ -372,13 +373,15 @@ const Admin = () => {
                         </TableRow>
                     ))
                     ) : (
-                    <TableRow>
+                        <TableRow>
                         <TableCell>no Information</TableCell>
                     </TableRow>
                     )}
                 </TableBody>
                 </Table>
+                </TableContainer>
                 {selectedCar ?
+                <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                     <TableRow>
@@ -419,6 +422,7 @@ const Admin = () => {
                     </TableRow>
                     </TableBody>
                 </Table>
+                </TableContainer>
                 : <div />}
             </Box>
             ) : <div />}
@@ -427,6 +431,7 @@ const Admin = () => {
 {isLotsOpen ? (
 
 <Box my="4">
+<TableContainer component={Paper}>
     <Table>
     <TableHead>
         <TableRow>
@@ -437,8 +442,8 @@ const Admin = () => {
     </TableHead>
     <TableBody>
         {lotList ? (
-        lotList.map((lot) => (
-            <TableRow key={lot.parkinglotID}>
+            lotList.map((lot) => (
+                <TableRow key={lot.parkinglotID}>
             <TableCell>{lot.parkinglotID}</TableCell>
             <TableCell>{lot.numberOfSpots}</TableCell>
             <TableCell>
@@ -449,13 +454,15 @@ const Admin = () => {
             </TableRow>
         ))
         ) : (
-        <TableRow>
+            <TableRow>
             <TableCell>no Information</TableCell>
         </TableRow>
         )}
     </TableBody>
     </Table>
+    </TableContainer>
     {selectedLot ?
+    <TableContainer component={Paper}>
     <Table>
         <TableHead>
         <TableRow>
@@ -480,6 +487,7 @@ const Admin = () => {
         </TableRow>
         </TableBody>
     </Table>
+    </TableContainer>
     : <div />}
 </Box>
 ) : <div />}
@@ -488,6 +496,7 @@ const Admin = () => {
 {isParkedOpen ? (
 
 <Box my="4">
+<TableContainer component={Paper}>
     <Table>
     <TableHead>
         <TableRow>
@@ -522,7 +531,9 @@ const Admin = () => {
         )}
     </TableBody>
     </Table>
+    </TableContainer>
     {selectedParkedCar ?
+    <TableContainer component={Paper}>
     <Table>
         <TableHead>
         <TableRow>
@@ -559,14 +570,16 @@ const Admin = () => {
         </TableRow>
         </TableBody>
     </Table>
+    </TableContainer>
     : <div />}
 </Box>
 ) : <div />}
-<Button variant="contained" color="primary" onClick={() => setNotesOpen(!isNotesOpen)}>Cars</Button>
+<Button variant="contained" color="primary" onClick={() => setNotesOpen(!isNotesOpen)}>Notifications</Button>
 
 {isNotesOpen ? (
 
 <Box my="4">
+<TableContainer component={Paper}>
     <Table>
     <TableHead>
         <TableRow>
@@ -599,7 +612,9 @@ const Admin = () => {
         )}
     </TableBody>
     </Table>
+    </TableContainer>
     {selectedNotification ?
+    <TableContainer component={Paper}>
     <Table>
         <TableHead>
         <TableRow>
@@ -632,6 +647,7 @@ const Admin = () => {
         </TableRow>
         </TableBody>
     </Table>
+    </TableContainer>
     : <div />}
 </Box>
 ) : <div />}
@@ -640,6 +656,7 @@ const Admin = () => {
 {isTagOpen ? (
 
 <Box my="4">
+<TableContainer component={Paper}>
     <Table>
     <TableHead>
         <TableRow>
@@ -671,7 +688,9 @@ const Admin = () => {
         )}
     </TableBody>
     </Table>
+    </TableContainer>
     {selectedTag ?
+    <TableContainer component={Paper}>
     <Table>
         <TableHead>
         <TableRow>
@@ -704,6 +723,7 @@ const Admin = () => {
         </TableRow>
         </TableBody>
     </Table>
+    </TableContainer>
     : <div />}
 </Box>
 ) : <div />}

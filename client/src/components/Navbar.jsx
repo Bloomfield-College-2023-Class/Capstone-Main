@@ -32,7 +32,7 @@ const Navbar = ({ isLoggedIn }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get('${BASE_URL}/logout', { withCredentials: true });
+      const response = await axios.get(`${BASE_URL}/logout`, { withCredentials: true });
       console.log(response.data);
       dispatch(logout())
     } catch (error) {

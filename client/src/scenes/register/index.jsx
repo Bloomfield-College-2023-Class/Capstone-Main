@@ -36,7 +36,7 @@ const Register = () => {
 
   const handleOnRegisterClick = async (formValues) => {
     try {
-      await axios.post('${BASE_URL}/users', {
+      await axios.post(`${BASE_URL}/users`, {
         firstName: formValues.firstName,
         lastName: formValues.lastName, 
         email: formValues.email, 
