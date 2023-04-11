@@ -28,7 +28,7 @@ const History = () => {
 
   const fetchCars = async () => {
     try {
-      const response = await axios.post("${BASE_URL}/getCarsID", {
+      const response = await axios.post(`${BASE_URL}/getCarsID`, {
         userID: userID,
       });
       await dispatch(setCars(response.data));
@@ -39,7 +39,7 @@ const History = () => {
 
   const populateList = async (carID) => {
     try {
-      const response = await axios.post("${BASE_URL}/parked", {
+      const response = await axios.post(`${BASE_URL}/parked`, {
         carID: carID,
       });
       if (response.data.length > 0) {
