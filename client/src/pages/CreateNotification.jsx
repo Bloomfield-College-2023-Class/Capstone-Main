@@ -17,7 +17,7 @@ const CreateNotification = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/createNotifications", {
+      const response = await axios.post("${BASE_URL}/createNotifications", {
         title,
         content,
         userID: recipient, // Replace this with the actual user ID

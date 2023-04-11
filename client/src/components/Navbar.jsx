@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout, setMode } from "state";
 import axios from "axios";
+import { BASE_URL } from "./url";
 
 
 
@@ -31,7 +32,7 @@ const Navbar = ({ isLoggedIn }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/logout', { withCredentials: true });
+      const response = await axios.get('${BASE_URL}/logout', { withCredentials: true });
       console.log(response.data);
       dispatch(logout())
     } catch (error) {

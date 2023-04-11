@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { DateTime } from 'luxon';
 import { Container, Box, Typography, Button, TextField } from '@mui/material';
 import axios from 'axios';
+import { BASE_URL } from 'components/url';
 
 const ParkingTag = () => {
 
@@ -17,7 +18,7 @@ const ParkingTag = () => {
 
   const addVehicle = async () => {
     try {
-      await axios.post("http://localhost:8080/addCar", {
+      await axios.post("${BASE_URL}/addCar", {
         userID: userID,
         licensePlate: licensePlate,
         make: make,

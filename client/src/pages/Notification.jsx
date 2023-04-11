@@ -3,13 +3,14 @@ import axios from "axios";
 import { Container, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector } from "react-redux";
+import { BASE_URL } from "components/url";
 
 const NotificationsPage = () => {
   const [notifications, setNotifications] = useState([]);
   const userID = useSelector((state) => state.user.userID);
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/notifications/${userID}`);
+      const response = await axios.get(`${BASE_URL}/notifications/${userID}`);
       setNotifications(response.data);
       console.log(response.data);
     } catch (error) {
@@ -23,7 +24,7 @@ const NotificationsPage = () => {
 
   const handleDelete = async (notificationID) => {
     try {
-      await axios.delete(`http://localhost:8080/deleteNotification/${notificationID}`);
+      await axios.delete(`${BASE_URL}/deleteNotification/${notificationID}`);
       setNotifications(notifications.filter((n) => n.notificationID !== notificationID));
     } catch (error) {
       console.error('Error deleting notification:', error);

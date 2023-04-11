@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCars } from "../../state/index.js"
 import axios from "axios";
 import { Container, Box, Typography, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, FormControl } from "@mui/material";
+import { BASE_URL } from "components/url.js";
 
 const Vehicles = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Vehicles = () => {
   const fetchCars = useCallback(async () => {
     try {
       console.log(userID);
-      const response = await axios.post("http://localhost:8080/getCarsID", {
+      const response = await axios.post("${BASE_URL}/getCarsID", {
         userID: userID,
       });
       console.log(response);
@@ -28,7 +29,7 @@ const Vehicles = () => {
 
   const addCars = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/import", {
+      const response = await axios.post("${BASE_URL}/import", {
         userID: userID,
         color: selectedCar.color,
         make: selectedCar.make,

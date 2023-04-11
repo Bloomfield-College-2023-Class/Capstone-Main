@@ -20,6 +20,7 @@ import {
 import { useDispatch} from "react-redux";
 import axios from "axios";
 import { setMode } from "state";
+import { BASE_URL } from "components/url";
 
 const Register = () => {
   // get theme
@@ -35,7 +36,7 @@ const Register = () => {
 
   const handleOnRegisterClick = async (formValues) => {
     try {
-      await axios.post('http://localhost:8080/users', {
+      await axios.post('${BASE_URL}/users', {
         firstName: formValues.firstName,
         lastName: formValues.lastName, 
         email: formValues.email, 

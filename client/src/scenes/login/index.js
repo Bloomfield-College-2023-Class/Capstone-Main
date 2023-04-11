@@ -21,6 +21,7 @@ import SpaceBetween from "components/SpaceBetween";
 import { useDispatch } from "react-redux";
 import { login, setUser } from "../../state/index.js"
 import axios from "axios";
+import { BASE_URL } from "components/url.js";
 
 const Login = () => {
 
@@ -43,7 +44,7 @@ const Login = () => {
   const handleLogin = async () => {
     // Set the username and password for the user.
     try {
-      const response = await axios.post('http://localhost:8080/login', {
+      const response = await axios.post('${BASE_URL}/login', {
         username: userName,
         password: password,
       });

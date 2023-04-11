@@ -22,7 +22,7 @@ const PersonalInformation = () => {
     const updateUser = async () => {
         if (password == password2) {
             try {
-                const response = await axios.patch('http://localhost:8080/updateUser', {
+                const response = await axios.patch('${BASE_URL}/updateUser', {
                     username: userName,
                     userID: user.userID,
                     password: password,
