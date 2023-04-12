@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ParkingTagPage = () => {
-  const [licensePlate, setLicensePlate] = useState('');
+  const [licensePlate, setLicensee] = useState('');
   const [duration, setDuration] = useState(1);
   const history = useNavigate();
 
