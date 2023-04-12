@@ -9,7 +9,7 @@ import ParkingTag from "scenes/parkingTag";
 import Vehicles from "scenes/vehicles";
 import Home from "./scenes/home";
 import Messages from "./pages/Messages";
-import Notification from "./pages/Notification";
+import Notifications from "./pages/Notification.jsx";
 import Navbar from "./components/Navbar";
 import Login from "./scenes/login";
 import ProtectedRoute from "components/ProtectedRoute";
@@ -108,7 +108,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/history" element={<History />} />
             <Route path="/messages" element={<Messages />} />
-            <Route path="/notifications" element={<Notification />} />
+            <Route path="/notifications" element={<Notifications />} />
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
             <Route path="/personalinformation" element={<PersonalInformation />} />
