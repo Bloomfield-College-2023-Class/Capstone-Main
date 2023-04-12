@@ -5,6 +5,7 @@ import { getByCar } from "../controllers/ParkedCars.js";
 import { createNotifications } from "../controllers/Notifications.js";
 import { getNotifications } from "../controllers/Notifications.js";
 import { deleteNotification } from "../controllers/Notifications.js";
+import { getCarByLicensePlate } from "../controllers/car.js";
 
 const router = express.Router();
 
@@ -16,10 +17,12 @@ router.post('/login', Login);
 router.get('/logout', Logout);
 
 //car stuff
+router.get('/getCarByLicensePlate', getCarByLicensePlate);
 router.get('/getCars', getCars);
 router.post('/getCarsID', getCarsbyID);
 router.post('/import', Import);
 router.patch('/updateCar', updateCar);
+
 
 //parked cars stuff
 router.post('/parked', getByCar);
