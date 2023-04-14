@@ -132,16 +132,17 @@ export const updateUser = async (req, res) => {
 // Get first name, last name, phone number and email of a user by first Name
 export const getUserByFirstName = async (req, res) => {
   try {
-    const { firstName } = req.params; //gets the first name from the frontend
+    const firstName = req.query.firstName; //gets the first name from the frontend
     const user = await User.findAll({
       where: {
         firstName: firstName, //finds the user with the first name
       },
       attributes: ["firstName", "lastName", "email", "phoneNumber"], //gets the first name, last name, email and phone number
     });
-    res.json(user); //set the response to the user
+    res.json(user); //send the response to the user
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Failed to get user" }); //if error, send a response indicating failure
   }
 };
+

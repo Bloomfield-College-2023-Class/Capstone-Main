@@ -78,7 +78,7 @@ export const getCarByLicensePlate = async (req, res) => {
   try {
     const car = await Car.findOne({
       where: {
-        licensePlate: req.body.licensePlate,
+        licensePlate: req.query.licensePlate,
       },
       attributes: ["carID", "userID", "color", "make", "model", "licensePlate"],
     });
