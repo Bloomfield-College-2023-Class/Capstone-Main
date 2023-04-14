@@ -6,6 +6,7 @@ import { createNotifications } from "../controllers/Notifications.js";
 import { getNotifications } from "../controllers/Notifications.js";
 import { deleteNotification } from "../controllers/Notifications.js";
 import { getCarByLicensePlate } from "../controllers/car.js";
+import { getUserByFirstName } from "../controllers/Users.js";
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.get('/users', getUsers);
 router.post('/users', Register);
 router.post('/login', Login);
 router.get('/logout', Logout);
+router.get('/getUserByFirstName', getUserByFirstName);
 
 //car stuff
 router.get('/getCarByLicensePlate', getCarByLicensePlate);
