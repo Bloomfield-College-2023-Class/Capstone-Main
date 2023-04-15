@@ -83,6 +83,35 @@ const Security = () => {
       return null;
     }
   };
+
+  const UserTable = () => {
+    if (user) {
+      return (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Phone Number</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>{user.firstName}</TableCell>
+                <TableCell>{user.lastName}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.phoneNumber}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
+    } else {
+      return null;
+    }
+  };
   
   return (
     <Container>
@@ -107,6 +136,22 @@ const Security = () => {
         </Button>
       </Box>
       {CarTable()}
+      <Box sx={{ mb: 2, mt: 2 }}>
+        <FormControl fullWidth>
+          <TextField
+            label="Search by First Name"
+            variant="outlined"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </FormControl>
+      </Box>
+      <Box sx={{ mb: 2 }}>
+        <Button variant="contained" onClick={searchUserByFirstName}>
+          Search First Name
+        </Button>
+      </Box>
+      {UserTable()}
     </Container>
   );
 };
