@@ -2,6 +2,10 @@ import db from "../config/database.js";
 
 const parkedCars = db.define('parkedCars', {
 
+    recordID: {
+        type: db.Sequelize.INTEGER,
+        allownull: false,
+    },
     parkinglotID: {
         type: db.Sequelize.INTEGER,
         allownull: false,

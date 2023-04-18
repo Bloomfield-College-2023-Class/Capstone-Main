@@ -17,6 +17,17 @@ export const createNotifications =  async (req, res) => {
   }
 };
 
+export const getAllNotifications = async (req, res) => {
+  try {
+    const notifications = await Notification.findAll({
+      attributes: ["notificationID", "userID", "title", "content"],
+    });
+    res.status(200).json(notifications)
+  } catch (error) {
+    res.status(500).json({ message: 'error while fetching.'})
+  }
+}
+
 export const getNotifications = async (req, res) => {
   try {
     const { userID } = req.params;
@@ -34,9 +45,24 @@ export const getNotifications = async (req, res) => {
   }
 };
 
+export const patchNotifications = async (req, res) => {
+  try {
+    const { notificationID, title, content, userID } = req.body;
+    let updatedNotification = {
+      notificationID, title, content, userID
+    }
+    const notification = Notification.findOne({ where: { notificationID } })
+    if(!notification) return res.status(404).json({ msg: "notification not found"})
+    await notification.update(updatedNotification, { where: {notificationID} })
+    return res.json({ msg: "update successful"})
+  } catch(error) {
+    res.status(500).json({ msg: "error"})
+  }
+}
+
 export const deleteNotification = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
     const deletedNotification = await Notification.destroy({ where: { notificationID: id } });
 
     if (!deletedNotification) {

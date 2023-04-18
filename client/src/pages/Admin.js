@@ -54,7 +54,7 @@ const Admin = () => {
 
     const fillNots = async () => {
         try {
-            const response = 0
+            const response = await axios.get(`${BASE_URL}/getAllNotifications`)
             setNotifications(response.data);
         } catch (error) {
             alert(error.message);
@@ -63,7 +63,7 @@ const Admin = () => {
 
     const fillParked = async () => {
         try {
-            const response = 0
+            const response = await axios.get(`${BASE_URL}/getAllParked`)
             setParkedCarsList(response.data);
         } catch (error) {
             alert(error.message);
@@ -72,7 +72,7 @@ const Admin = () => {
 
     const fillTags = async () => {
         try {
-            const response = 0
+            const response = await axios.get(`${BASE_URL}/getTags`)
             setTags(response.data);
         } catch (error) {
             alert(error.message);
@@ -91,6 +91,7 @@ const Admin = () => {
                 userType: selectedUser.userType
             })
             alert("update successful")
+            fillUsers();
         } catch (error) {
             alert(error.message)
         }
@@ -107,6 +108,7 @@ const Admin = () => {
                 licensePlate: selectedCar.licensePlate
             })
             alert("update successful")
+            fillCars();
         } catch (error) {
             alert(error.message)
         }
@@ -115,9 +117,11 @@ const Admin = () => {
     const updateLots = async () => {
         try {
             const response = await axios.patch(`${BASE_URL}/updateCar`, {
-                
+                lotID: selectedLot.lotID,
+                numberOfSpots: selectedLot.numberOfSpots
             })
             alert("update successful")
+            fillLots();
         } catch (error) {
             alert(error.message)
         }
@@ -126,9 +130,14 @@ const Admin = () => {
     const updateParked = async () => {
         try {
             const response = await axios.patch(`${BASE_URL}/updateCar`, {
-                
+                recordID: selectedParkedCar.recordID,
+                parkinglotID: selectedParkedCar.parkinglotID,
+                carID: selectedParkedCar.carID,
+                timeEntered: selectedParkedCar.timeEntered,
+                timeExited: selectedParkedCar.timeExited
             })
             alert("update successful")
+            fillParked();
         } catch (error) {
             alert(error.message)
         }
@@ -136,10 +145,14 @@ const Admin = () => {
 
     const updateNots = async () => {
         try {
-            const response = await axios.patch(`${BASE_URL}/updateCar`, {
-                
+            const response = await axios.patch(`${BASE_URL}/patchNotification`, {
+                notificationID: selectedNotification.notificationID,
+                title: selectedNotification.title,
+                content: selectedNotification.content,
+                userID: selectedNotification.userID
             })
             alert("update successful")
+            fillNots()
         } catch (error) {
             alert(error.message)
         }
@@ -147,10 +160,74 @@ const Admin = () => {
 
     const updateTags = async () => {
         try {
-            const response = await axios.patch(`${BASE_URL}/updateCar`, {
-                
+            const response = await axios.patch(`${BASE_URL}/updateTag`, {
+                tagID: selectedTag.tagID,
+                userID: selectedTag.userID,
+                expirationDate: selectedTag.expirationDate,
+                effectiveDate: selectedTag.effectiveDate
             })
             alert("update successful")
+            fillTags()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const deleteUser = async () => {
+        try{
+            const user = selectedUser.userID
+            console.log(user)
+            const response = await axios.delete(`${BASE_URL}/deleteUser`, {data: {
+                userID: user
+            }})
+            alert("delete successful")
+            fillUsers()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const deleteCar = async () => {
+        try{
+            const response = await axios.delete(`${BASE_URL}/deleteCar`, {data: {
+                carID: selectedCar.carID
+            }})
+            alert("delete successful")
+            fillCars()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const deleteNots = async () => {
+        try{
+            const response = await axios.delete(`${BASE_URL}/deleteNotification`, {data: {id: selectedNotification.notificationID}})
+            alert("delete successful")
+            fillNots()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const deleteParkedCars = async () => {
+        try{
+            const response = await axios.delete(`${BASE_URL}/deletePark`, {data: {
+                recordID: selectedParkedCar.recordID
+            }})
+            alert("delete successful")
+            fillParked()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const deleteTags = async () => {
+        try{
+            const response = await axios.delete(`${BASE_URL}/deleteTag`, {data: {
+                tagID: selectedTag.tagID
+            }})
+            alert("delete successful")
+            fillTags()
         } catch (error) {
             alert(error.message)
         }
@@ -230,6 +307,11 @@ const Admin = () => {
                                                         Select
                                                     </Button>
                                                 </TableCell>
+                                                <TableCell>
+                                                    <Button variant="contained" color="primary" onClick={() => handleUserClick(user)}>
+                                                        Select
+                                                    </Button>
+                                                </TableCell>
                                             </TableRow>
                                         ))
                                     ) : (
@@ -252,7 +334,8 @@ const Admin = () => {
                                         <TableCell>Phone Number</TableCell>
                                         <TableCell>Username</TableCell>
                                         <TableCell>User Type</TableCell>
-                                        <TableCell>Confirm Change</TableCell>
+                                        <TableCell>Update</TableCell>
+                                        <TableCell>Delete</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -330,6 +413,11 @@ const Admin = () => {
                                                 Update
                                             </Button>
                                         </TableCell>
+                                        <TableCell>
+                                            <Button variant="contained" color="primary" onClick={() => deleteUser()}>
+                                                Delete
+                                            </Button>
+                                        </TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -391,7 +479,8 @@ const Admin = () => {
                         <TableCell>Make</TableCell>
                         <TableCell>Model</TableCell>
                         <TableCell>License</TableCell>
-                        <TableCell>Confirm</TableCell>
+                        <TableCell>Update</TableCell>
+                        <TableCell>Delete</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -417,6 +506,11 @@ const Admin = () => {
                         <TableCell>
                         <Button onClick={() => updateCar()} variant="contained" color="primary">
                             Update
+                        </Button>
+                        </TableCell>
+                        <TableCell>
+                        <Button onClick={() => deleteCar()} variant="contained" color="primary">
+                            Delete
                         </Button>
                         </TableCell>
                     </TableRow>
@@ -542,7 +636,8 @@ const Admin = () => {
             <TableCell>Car ID</TableCell>
             <TableCell>Time Entered</TableCell>
             <TableCell>Time Exited</TableCell>
-            <TableCell>Confirm</TableCell>
+            <TableCell>Update</TableCell>
+            <TableCell>Delete</TableCell>
         </TableRow>
         </TableHead>
         <TableBody>
@@ -565,6 +660,11 @@ const Admin = () => {
             <TableCell>
             <Button onClick={() => updateParked()} variant="contained" color="primary">
                 Update
+            </Button>
+            </TableCell>
+            <TableCell>
+            <Button onClick={() => deleteParkedCars()} variant="contained" color="primary">
+                Delete
             </Button>
             </TableCell>
         </TableRow>
@@ -622,7 +722,8 @@ const Admin = () => {
             <TableCell>User ID</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Content</TableCell>
-            <TableCell>confirm</TableCell>
+            <TableCell>Update</TableCell>
+            <TableCell>Delete</TableCell>
         </TableRow>
         </TableHead>
         <TableBody>
@@ -642,6 +743,11 @@ const Admin = () => {
             <TableCell>
             <Button onClick={() => updateNots()} variant="contained" color="primary">
                 Update
+            </Button>
+            </TableCell>
+            <TableCell>
+            <Button onClick={() => deleteNots()} variant="contained" color="primary">
+                Delete
             </Button>
             </TableCell>
         </TableRow>
@@ -698,7 +804,8 @@ const Admin = () => {
             <TableCell>User ID</TableCell>
             <TableCell>Effective Date</TableCell>
             <TableCell>Expiration Date</TableCell>
-            <TableCell>Confirm</TableCell>
+            <TableCell>Update</TableCell>
+            <TableCell>Delete</TableCell>
         </TableRow>
         </TableHead>
         <TableBody>
@@ -718,6 +825,11 @@ const Admin = () => {
             <TableCell>
             <Button onClick={() => updateTags()} variant="contained" color="primary">
                 Update
+            </Button>
+            </TableCell>
+            <TableCell>
+            <Button onClick={() => deleteTags()} variant="contained" color="primary">
+                Delete
             </Button>
             </TableCell>
         </TableRow>

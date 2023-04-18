@@ -89,3 +89,16 @@ export const getCarByLicensePlate = async (req, res) => {
     res.status(500).json({ msg: "Failed to get Car" });
   }
 };
+
+export const deleteCar = async (req, res) => {
+  try {
+    const { carID } = req.body;
+    const car = await Car.findOne({ where: { carID } });
+    if (!car) return res.status(404).json({ msg: "Car not found" });
+    await Car.destroy({ where: { carID } });
+    return res.json({ msg: "Car deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Failed to delete Car" });
+  }
+};
