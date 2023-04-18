@@ -8,6 +8,7 @@ import { deleteNotification } from "../controllers/Notifications.js";
 import { getCarByLicensePlate } from "../controllers/car.js";
 import { addTag, deleteTag, getTagbyID, getTags, updateTag } from "../controllers/Tags.js";
 import { getParking, updateParking } from "../controllers/ParkingLot.js";
+import { getUserByFirstName } from "../controllers/Users.js";
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.post('/users', Register);
 router.post('/login', Login);
 router.get('/logout', Logout);
 router.delete('/deleteUser', deleteUser)
+router.get('/getUserByFirstName', getUserByFirstName);
 
 //car stuff
 router.get('/getCarByLicensePlate', getCarByLicensePlate);

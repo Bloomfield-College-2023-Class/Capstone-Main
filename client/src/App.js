@@ -18,6 +18,7 @@ import Settings from "pages/Settings"
 import Profile from "pages/Profile"
 import Admin from "pages/Admin";
 import parkingActions from "pages/parkingActions";
+import Security from "pages/Security";
 import HomeProtector from "components/homeProtector";
 import CreateNotification from "pages/CreateNotification";
 
@@ -48,7 +49,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             {/*<Route path={"/home"} element={<Home/> }/>*/}
             {/* Home route is protected */}
-             <Route path="/home" element={
+            <Route path="/home" element={
               <HomeProtector isLoggedIn={isLoggedIn} user={user}>
                 <Home />
               </HomeProtector>} /> 
@@ -117,6 +118,7 @@ function App() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/createnotification" element={<CreateNotification />} />
             <Route path ="/parkingActions" element={<parkingActions />} />
+            <Route path="/security" element={<Security />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
