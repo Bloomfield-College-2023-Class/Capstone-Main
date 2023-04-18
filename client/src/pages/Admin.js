@@ -45,7 +45,7 @@ const Admin = () => {
 
     const fillLots = async () => {
         try {
-            const response = 0
+            const response = await axios.get(`${BASE_URL}/getLots`);
             setLotList(response.data);
         } catch (error) {
             alert(error.message);
@@ -116,7 +116,7 @@ const Admin = () => {
 
     const updateLots = async () => {
         try {
-            const response = await axios.patch(`${BASE_URL}/updateCar`, {
+            const response = await axios.patch(`${BASE_URL}/updateLot`, {
                 lotID: selectedLot.lotID,
                 numberOfSpots: selectedLot.numberOfSpots
             })

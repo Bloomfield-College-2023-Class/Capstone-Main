@@ -15,6 +15,14 @@ const ParkingTag = () => {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
   const [color, setColor] = useState("");
+  const [addTag, setAdd] = useState(false);
+  const [tag, setTag] = useState();
+  const [valid, setValid] = useState(false);
+  const now = useState(DateTime.now());
+  const [effectiveDate, setEffectiveDate] = useState();
+  const [expirationDate, setExpirationDate] = useState();
+  const [purchaseEffective, setPurchaseEffective] = useState();
+  const [purchaseExpiration, setPurchaseExpiration] = useState();
 
   const addVehicle = async () => {
     try {
@@ -31,26 +39,47 @@ const ParkingTag = () => {
     }
   };
 
-  const tag = useSelector((state) => state.Tag);
-  const [valid, setValid] = useState(false);
-  const now = useState(DateTime.now());
+  const addTags = async () => {
+    try {
+      await axios.post(`${BASE_URL}/addTag`, {
+        userID: userID,
+        effectiveDate: purchaseEffective,
+        expirationDate: purchaseExpiration,
+      })
+      findTag();
+      alert("Tag added")
+    } catch(error) {
+      alert(error.message);
+    }
+  }
 
-  // Mock tag data
-  const mockTag = {
-    effective: DateTime.now().minus({ days: 1 }).toSQL(),
-    expiration: DateTime.now().plus({ days: 30 }).toSQL(),
-  };
+  const findTag = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/getTagByID`, {
+        userID: userID
+      })
+      console.log(response);
+      setTag(response);
+      setEffectiveDate(response.data[0].effectiveDate);
+      setExpirationDate(response.data[0].expirationDate);
+      console.log(response.data[0].effectiveDate)
+      verify();
+    } catch(error) {
+      alert(error.message);
+    }
+  }
 
-  const dateValid = tag ? DateTime.fromSQL(tag.effective) : DateTime.fromSQL(mockTag.effective);
-  const dateExpire = tag ? DateTime.fromSQL(tag.expiration) : DateTime.fromSQL(mockTag.expiration);
-
-  useEffect(() => {
-    if ((tag !== " " && now > dateExpire) || (tag !== " " && now < dateValid)) {
+  const verify = () => {
+    if ((tag !== " " && now > expirationDate) || (tag !== " " && now < effectiveDate)) {
       setValid(false);
     } else {
       setValid(true);
     }
-  }, [tag, now, dateExpire, dateValid]);
+  };
+
+  useEffect(() => {
+    findTag();
+  }, [])
 
   return (
     <Container maxWidth="sm">
@@ -67,15 +96,48 @@ const ParkingTag = () => {
           False
         </Typography>
       )}
-      <Typography variant="h6" mb={2}>
-        Effective Date: {dateValid.toFormat("MMMM dd, yyyy")}
-      </Typography>
-      <Typography variant="h6" mb={2}>
-        Expiration Date: {dateExpire.toFormat("MMMM dd, yyyy")}
-      </Typography>
-      <Button variant="contained" color="primary" onClick={() => {}}>
+      {effectiveDate ? <Typography variant="h6" mb={2}>
+        Effective Date: {effectiveDate}
+      </Typography> : <Typography variant="h6" mb={2}>
+        Effective Date: None
+        </Typography>}
+      { expirationDate ? <Typography variant="h6" mb={2}>
+        Expiration Date: {expirationDate}
+      </Typography> : <Typography variant="h6" mb={2}>
+        Expiration Date: None
+      </Typography> }
+      <Button variant="contained" color="primary" onClick={() => setAdd(!addTag)}>
         Purchase
       </Button>
+      {addTag ? (
+        <Box>
+          <form>
+            <TextField
+              label="Effective Date"
+              fullWidth
+              color="warning"
+              variant="outlined"
+              value={effectiveDate}
+              onChange={(e) => setPurchaseEffective(e.target.value)}
+              margin="normal"
+            />
+            <TextField
+              label="Expiration Date"
+              fullWidth
+              color="warning"
+              variant="outlined"
+              value={expirationDate}
+              onChange={(e) => setPurchaseExpiration(e.target.value)}
+              margin="normal"
+            />
+            <Box mt={2}>
+            <Button variant="contained" color="primary" onClick={addTags}>
+              Add Tag
+            </Button>
+          </Box>
+          </form>
+        </Box>
+      ) : (<Box />)}
     </Box>
     <Box my={4}>
         <Typography variant="h4" mb={2}>

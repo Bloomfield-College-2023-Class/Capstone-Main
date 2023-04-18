@@ -38,7 +38,7 @@ router.delete('/deletePark', deleteParkedCar);
 router.post('/createNotifications', createNotifications);
 router.get('/notifications/:userID', getNotifications);
 router.get('/getAllNotifications', getAllNotifications);
-router.delete('/deleteNotification/', deleteNotification);
+router.delete('/deleteNotification', deleteNotification);
 router.patch('/patchNotification', patchNotifications);
 
 //Tag stuff

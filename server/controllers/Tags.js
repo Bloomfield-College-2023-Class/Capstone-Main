@@ -15,7 +15,7 @@ export const getTags = async (req, res) => {
     try {
       const tags = await Tag.findAll({
         where: {
-          tagID: req.body.tagID,
+          userID: req.body.userID,
         },
         attributes: ["tagID", "userID", "expirationDate", "effectiveDate"],
       });
@@ -56,7 +56,7 @@ export const getTags = async (req, res) => {
   
     try {
       // Update table
-      await Car.create({
+      await Tag.create({
         userID: userID,
         tagID: tagID,
         expirationDate: expirationDate,
