@@ -17,12 +17,9 @@ import PersonalInformation from "pages/personalInformation";
 import Settings from "pages/Settings"
 import Profile from "pages/Profile"
 import Admin from "pages/Admin";
-<<<<<<< Updated upstream
 import parkingActions from "pages/parkingActions";
 import Security from "pages/Security";
-=======
 import ParkingTagPage from "pages/parkingActions";
->>>>>>> Stashed changes
 import HomeProtector from "components/homeProtector";
 import CreateNotification from "pages/CreateNotification";
 
@@ -59,10 +56,10 @@ function App() {
               </HomeProtector>} /> 
             
             {/* Messages Route is Protected */}
-            <Route path="/messages" element={
+            {/*<Route path="/messages" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Messages />
-              </ProtectedRoute>} />
+            </ProtectedRoute>} />*/}
 
             {/* Notifications Route is Protected */}
             {/* <Route path="/notifications" element={
@@ -112,7 +109,6 @@ function App() {
 
             <Route path="/home" element={<Home />} />
             <Route path="/history" element={<History />} />
-            <Route path="/messages" element={<Messages />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
@@ -121,12 +117,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/createnotification" element={<CreateNotification />} />
-<<<<<<< Updated upstream
             <Route path ="/parkingActions" element={<parkingActions />} />
             <Route path="/security" element={<Security />} />
-=======
-            <Route path ="/parkingActions" element={<ParkingTagPage />} />
->>>>>>> Stashed changes
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
