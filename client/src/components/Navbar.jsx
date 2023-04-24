@@ -8,13 +8,13 @@ import {
 } from "@mui/material";
 import {
   Home,
-  Message,
   Notifications,
   Logout,
   DarkMode,
   Settings,
   LightMode,
   AccountBox,
+  Details
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -78,9 +78,9 @@ const Navbar = ({ isLoggedIn }) => {
             {/* Set the theme */}
 
              {/* To buy a parkingTag */}
-             <IconButton color="inherit" component={Link} to="/ParkingActions" sx={{marginRight: '20px'}}>
-              <parkingActions/>
-              parkingActions
+            <IconButton color="inherit" component={Link} to="/ParkingActions" sx={{marginRight: '20px'}}>
+              <Details />
+              Parking Actions
             </IconButton>
 
             <IconButton onClick={() => dispatch(setMode())}>

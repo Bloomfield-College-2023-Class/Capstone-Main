@@ -114,7 +114,7 @@ const Security = () => {
   };
   
   return (
-    <Container>
+    <Container maxWidth="sm">
       <Box sx={{ mb: 2, mt: 2 }}>
         <Typography variant="h4">
           Search by License Plate or First Name

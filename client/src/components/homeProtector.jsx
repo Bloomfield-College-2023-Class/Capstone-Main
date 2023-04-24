@@ -11,6 +11,10 @@ const HomeProtector = ({ isLoggedIn, children }) => {
     // If the user is logged in but doesn't have the required user type,
     // redirect to a different route (e.g. home)
     return <Navigate to={"/admin"} replace />;
+    //if the user is of security type
+    //redirect him to the security dashboard
+  } else if (user && user.userType === "security") {
+    return <Navigate to={"/security"} replace />;
   }
 
   // If the user is logged in and has the required user type, allow access

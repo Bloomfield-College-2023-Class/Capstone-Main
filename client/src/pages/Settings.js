@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Box, Typography } from '@mui/material';
+import { Button, Box, Typography } from "@mui/material";
+import { Container } from "@mui/system";
 
 const Settings = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    return (
+  return (
+    <Container maxWidth="sm" >
       <Box
         display="flex"
         flexDirection="column"
@@ -19,31 +20,34 @@ const Settings = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => navigate('/profile')}
-          style={{ marginBottom: '16px' }}
+          onClick={() => navigate("/profile")}
+          style={{ marginBottom: "16px" }}
+          fullWidth
         >
           Profile
         </Button>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => navigate('/notifications')}
-          style={{ marginBottom: '16px' }}
+          onClick={() => navigate("/notifications")}
+          style={{ marginBottom: "16px" }}
+          fullWidth
         >
           Notifications
         </Button>
         <Button
           variant="contained"
           color="primary"
-          onClick={() => navigate('/history')}
-          style={{ marginBottom: '16px' }}
+          onClick={() => navigate("/history")}
+          style={{ marginBottom: "16px" }}
+          fullWidth
         >
           History
         </Button>
       </Box>
-    );
-    
-}
+    </Container>
+  );
+};
 
 export default Settings;
 
