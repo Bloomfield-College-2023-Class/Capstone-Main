@@ -76,6 +76,13 @@ const Navbar = ({ isLoggedIn }) => {
               Settings
             </IconButton>
             {/* Set the theme */}
+
+             {/* To buy a parkingTag */}
+             <IconButton color="inherit" component={Link} to="/ParkingActions" sx={{marginRight: '20px'}}>
+              <parkingActions/>
+              parkingActions
+            </IconButton>
+
             <IconButton onClick={() => dispatch(setMode())}>
               {/* Ternary operator for theme bellow */}
               {theme.palette.mode === "dark" ? (
