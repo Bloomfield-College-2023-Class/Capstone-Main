@@ -288,7 +288,6 @@ const Admin = () => {
                                         <TableCell>Phone Number</TableCell>
                                         <TableCell>Username</TableCell>
                                         <TableCell>User Type</TableCell>
-                                        <TableCell>RFID</TableCell>
                                         <TableCell>Select</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -303,7 +302,6 @@ const Admin = () => {
                                                 <TableCell>{user.phoneNumber}</TableCell>
                                                 <TableCell>{user.username}</TableCell>
                                                 <TableCell>{user.userType}</TableCell>
-                                                <TableCell>{user.rfid}</TableCell>
                                                 <TableCell>
                                                     <Button variant="contained" color="primary" onClick={() => handleUserClick(user)}>
                                                         Select

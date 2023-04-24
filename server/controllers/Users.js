@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 export const getUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: ["firstName", "lastName", "email", "phoneNumber", "username", "userID", "userType", "rfid"],
+      attributes: ["firstName", "lastName", "email", "phoneNumber", "username", "userID", "userType"],
     });
     res.json(users);
   } catch (error) {
@@ -23,8 +23,7 @@ export const Register = async (req, res) => {
     password,
     confirmPassword,
     username,
-    phoneNumber,
-    rfid
+    phoneNumber
   } = req.body;
 
   //Make sure passwords match
@@ -44,8 +43,7 @@ export const Register = async (req, res) => {
       phoneNumber: phoneNumber,
       email: email,
       psw: hashPassword,
-      userType: "student",
-      rfid: rfid
+      userType: "student"
     });
     res.json({ msg: "success registration" }); // send a response indicating success
   } catch (error) {
@@ -63,7 +61,7 @@ export const Login = async (req, res) => {
       where: {
         username: req.body.username, //finds the user with the username passed from the front end
       },
-      attributes: ["userID", "psw", "firstName", "lastName", "email", "phoneNumber", "username", "userType", "rfid"]
+      attributes: ["userID", "psw", "firstName", "lastName", "email", "phoneNumber", "username", "userType"]
     });
 
     //Verify Passwords
@@ -84,7 +82,7 @@ export const Login = async (req, res) => {
     const userObj = user[0].toJSON();
     console.log(userObj)
     const { userID, firstName, lastName, phoneNumber, email, userType, username } = userObj; //a user object is created and sent to the front end so that we can keep track of who is logged in
-    res.json({ msg: "success", user: { userID, firstName, lastName, phoneNumber, email, userType, username, rfid }, sessionUser : req.session.user }); //success message, user, and session user is sent to the front end
+    res.json({ msg: "success", user: { userID, firstName, lastName, phoneNumber, email, userType, username }, sessionUser : req.session.user }); //success message, user, and session user is sent to the front end
   } catch (error) {
     //If user does not exists
     res.status(404).json({ msg: "User not found" }); //send error message
@@ -105,7 +103,7 @@ export const Logout = async (req, res) => {
 // Update user information by userID
 export const updateUser = async (req, res) => {
   try {
-    const { userID, firstName, lastName, email, phoneNumber, password, username, userType, rfid } = req.body; //gets the user id, first name, last name, email, phone number, password, username and user type from the frontend
+    const { userID, firstName, lastName, email, phoneNumber, password, username, userType } = req.body; //gets the user id, first name, last name, email, phone number, password, username and user type from the frontend
     let updatedUser = {
       userID,
       firstName,
@@ -114,8 +112,7 @@ export const updateUser = async (req, res) => {
       phoneNumber, 
       username,
       userType,
-      password,
-      rfid
+      password
     };
     if (password) { //if password is not empty, we hash it and add it to the updated user object
       const salt = await bcrypt.genSalt();

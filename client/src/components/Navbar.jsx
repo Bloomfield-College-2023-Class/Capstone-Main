@@ -60,11 +60,6 @@ const Navbar = ({ isLoggedIn }) => {
               <Home />
               Home
             </IconButton>
-            {/* Messages */}
-            <IconButton color="inherit" component={Link} to="/messages" sx={{marginLeft: '20px', marginRight: '20px'}}>
-              <Message />
-              Messages
-            </IconButton>
             {/* Notifications */}
             <IconButton color="inherit" component={Link} to="/notifications" sx={{marginRight: '20px'}}>
               <Notifications />

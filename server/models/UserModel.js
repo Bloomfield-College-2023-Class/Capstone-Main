@@ -31,10 +31,6 @@ const User = db.define('users', {
     type: db.Sequelize.ENUM('student', 'security', 'admin'),
     allowNull: false
   },
-  rfid: {
-    type: db.Sequelize.STRING,
-    allowNull: true
-  },
   username: {
     type: db.Sequelize.STRING,
     allowNull: false,
