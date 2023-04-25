@@ -139,7 +139,7 @@ const ParkingTag = () => {
         </Box>
       ) : (<Box />)}
     </Box>
-    <Box my={4}>
+    {/*<Box my={4}>
         <Typography variant="h4" mb={2}>
           Add Vehicle
         </Typography>
@@ -186,7 +186,7 @@ const ParkingTag = () => {
             </Button>
           </Box>
         </form>
-      </Box>
+      </Box>*/}
   </Container>
   );
 };

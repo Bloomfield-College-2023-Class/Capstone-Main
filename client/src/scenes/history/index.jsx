@@ -68,7 +68,7 @@ const History = () => {
     }
 
     fetchData();
-  }, [userID, cars]);
+  }, []);
 
   return (
     <Container>
@@ -107,14 +107,7 @@ const History = () => {
                 )}
           </TableBody>
         </Table>
-      </TableContainer>
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ marginTop: "16px" }}
-      >
-        Add Vehicle
-      </Button>
+      </TableContainer> 
     </Container>
   );
 };

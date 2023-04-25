@@ -13,11 +13,11 @@ const Tag = db.define('tag', {
     },
     expirationDate: {
         type: db.Sequelize.DATE,
-        allowNull: true
+        allowNull: false
     },
     effectiveDate: {
         type: db.Sequelize.DATE,
-        allowNull: true
+        allowNull: false
     },
     createdAt: {
         type: db.Sequelize.DATE,

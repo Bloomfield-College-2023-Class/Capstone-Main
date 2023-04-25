@@ -130,7 +130,7 @@ const Admin = () => {
     const updateLots = async () => {
         try {
             const response = await axios.patch(`${BASE_URL}/updateLot`, {
-                lotID: selectedLot.lotID,
+                parkingLotID: selectedLot.parkingLotID,
                 numberOfSpots: selectedLot.numberOfSpots
             })
             alert("update successful")
