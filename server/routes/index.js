@@ -9,6 +9,7 @@ import { getCarByLicensePlate } from "../controllers/car.js";
 import { addTag, deleteTag, getTagbyID, getTags, updateTag } from "../controllers/Tags.js";
 import { getParking, updateParking } from "../controllers/ParkingLot.js";
 import { getUserByFirstName } from "../controllers/Users.js";
+import { deleteCard, getCards, updateCard } from "../controllers/Cards.js";
 
 const router = express.Router();
 
@@ -51,5 +52,10 @@ router.delete('/deleteTag', deleteTag);
 //Parking Lots
 router.get('/getLots', getParking);
 router.patch('/updateLot', updateParking);
+
+//Cards
+router.get('getCards', getCards);
+router.patch('updateCard', updateCard);
+router.delete('deleteCard', deleteCard);
 
 export default router;

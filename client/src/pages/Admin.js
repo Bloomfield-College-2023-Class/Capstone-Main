@@ -10,6 +10,7 @@ const Admin = () => {
     const [notifications, setNotifications] = useState([])
     const [parkedCarsList, setParkedCarsList] = useState([])
     const [tags, setTags] = useState([])
+    const [cards, setCards] = useState([])
 
     const [selectedUser, setSelectedUser] = useState();
     const [selectedCar, setSelectedCar] = useState();
@@ -17,6 +18,7 @@ const Admin = () => {
     const [selectedNotification, setSelectedNotification] = useState();
     const [selectedParkedCar, setSelectedParkedCar] = useState();
     const [selectedTag, setSelectedTag] = useState();
+    const [selectedCard, setSelectedCard] = useState();
 
     const [isUsersOpen, setIsUsersOpen] = useState(false);
     const [isCarsOpen, setIsCarsOpen] = useState(false);
@@ -24,6 +26,7 @@ const Admin = () => {
     const [isNotesOpen, setNotesOpen] = useState(false);
     const [isParkedOpen, setIsParkedOpen] = useState(false);
     const [isTagOpen, setTagOpen] = useState(false);
+    const [isCardOpen, setCardOpen] = useState(false);
 
     const fillUsers = async () => {
         try {
@@ -76,6 +79,15 @@ const Admin = () => {
             setTags(response.data);
         } catch (error) {
             console.log(error.message);
+        }
+    }
+
+    const fillCards = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/getCards`)
+            setCards(response.data);
+        } catch (error) {
+            console.log(error.message)
         }
     }
 
@@ -173,6 +185,19 @@ const Admin = () => {
         }
     }
 
+    const updateCard = async () => {
+        try {
+            const response = await axios.patch(`${BASE_URL}/updateCard`, {
+                rfid: selectedCard.rfid,
+                userID: selectedTag.userID
+            })
+            alert("update successful")
+            fillCards()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
     const deleteUser = async () => {
         try{
             const user = selectedUser.userID
@@ -233,6 +258,18 @@ const Admin = () => {
         }
     }
 
+    const deleteCard = async () => {
+        try {
+            const response = await axios.delete(`${BASE_URL}/deleteCard`, {data: {
+                rfid: selectedCard.rfid
+            }})
+            alert("delete successful")
+            fillCards();
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
     const handleUserClick = (user) => {
         setSelectedUser(user);
     };
@@ -257,6 +294,10 @@ const Admin = () => {
         setSelectedTag(tag);
     }
 
+    const handleCardClick = (card) => {
+        setSelectedCard(card);
+    }
+
     useEffect(() => {
         fillUsers();
         fillCars();
@@ -264,6 +305,7 @@ const Admin = () => {
         fillNots();
         fillParked();
         fillTags();
+        fillCards();
     }, []);
 
     return (
@@ -520,7 +562,7 @@ const Admin = () => {
                 : <div />}
             </Box>
             ) : <div />}
-            <Button variant="contained" color="primary" onClick={() => setIsLotsOpen(!!isLotsOpen)}>Lots</Button>
+            <Button variant="contained" color="primary" onClick={() => setIsLotsOpen(!isLotsOpen)}>Lots</Button>
 
 {isLotsOpen ? (
 
@@ -537,8 +579,8 @@ const Admin = () => {
     <TableBody>
         {lotList ? (
             lotList.map((lot) => (
-                <TableRow key={lot.parkinglotID}>
-            <TableCell>{lot.parkinglotID}</TableCell>
+                <TableRow key={lot.parkingLotID}>
+            <TableCell>{lot.parkingLotID}</TableCell>
             <TableCell>{lot.numberOfSpots}</TableCell>
             <TableCell>
                 <Button onClick={() => handleLotClick(lot)} variant="contained" color="primary">
@@ -568,7 +610,7 @@ const Admin = () => {
         <TableBody>
         <TableRow>
             <TableCell>
-            <TextField type="text" className="input" value={selectedLot.parkinglotID} onChange={(e) => setSelectedLot({ ...selectedLot, parkinglotID: e.target.value })} />
+            <TextField type="text" className="input" value={selectedLot.parkingLotID} onChange={(e) => setSelectedLot({ ...selectedLot, parkingLotID: e.target.value })} />
             </TableCell>
             <TableCell>
             <TextField type="text" className="input" value={selectedLot.numberOfSpots} onChange={(e) => setSelectedLot({ ...selectedLot, numberOfSpots: e.target.value })} />
@@ -829,6 +871,75 @@ const Admin = () => {
             </TableCell>
             <TableCell>
             <Button onClick={() => deleteTags()} variant="contained" color="primary">
+                Delete
+            </Button>
+            </TableCell>
+        </TableRow>
+        </TableBody>
+    </Table>
+    </TableContainer>
+    : <div />}
+</Box>
+) : <div />}
+
+<Button variant="contained" color="primary" onClick={() => setCardOpen(!isCardOpen)}>Cards</Button>
+
+{isCardOpen ? (
+
+<Box my="4">
+<TableContainer component={Paper}>
+    <Table>
+    <TableHead>
+        <TableRow>
+        <TableCell>RFID</TableCell>
+        <TableCell>User ID</TableCell>
+        </TableRow>
+    </TableHead>
+    <TableBody>
+        {cards ? (
+        cards.map((card) => (
+            <TableRow key={card.rfid}>
+            <TableCell>{card.rfid}</TableCell>
+            <TableCell>{card.userID}</TableCell>
+            <TableCell>
+                <Button onClick={() => handleCardClick(card)} variant="contained" color="primary">
+                Select
+                </Button>
+            </TableCell>
+            </TableRow>
+        ))
+        ) : (
+        <TableRow>
+            <TableCell>no Information</TableCell>
+        </TableRow>
+        )}
+    </TableBody>
+    </Table>
+    </TableContainer>
+    {selectedCard ?
+    <TableContainer component={Paper}>
+    <Table>
+        <TableHead>
+        <TableRow>
+            <TableCell>RFID</TableCell>
+            <TableCell>User ID</TableCell>
+        </TableRow>
+        </TableHead>
+        <TableBody>
+        <TableRow>
+            <TableCell>
+            <TextField type="text" className="input" value={selectedCard.RFID} onChange={(e) => setSelectedCard({ ...selectedCard, rfid: e.target.value })} />
+            </TableCell>
+            <TableCell>
+            <TextField type="text" className="input" value={selectedCard.userID} onChange={(e) => setSelectedCard({ ...selectedCard, userID: e.target.value })} />
+            </TableCell>
+            <TableCell>
+            <Button onClick={() => updateCard()} variant="contained" color="primary">
+                Update
+            </Button>
+            </TableCell>
+            <TableCell>
+            <Button onClick={() => deleteCard()} variant="contained" color="primary">
                 Delete
             </Button>
             </TableCell>
