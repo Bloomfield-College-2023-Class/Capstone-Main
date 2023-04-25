@@ -4,7 +4,6 @@ import { DateTime } from 'luxon';
 import { Container, Box, Typography, Button, TextField } from '@mui/material';
 import axios from 'axios';
 import { BASE_URL } from 'components/url';
-
 const ParkingTag = () => {
 
   //get user info
@@ -80,6 +79,14 @@ const ParkingTag = () => {
   useEffect(() => {
     findTag();
   }, [])
+
+  const handleRedirect = () => {
+    const redirectUrl =
+      'https://mybloomfield.bloomfield.edu/Pages/WebAdvisor.aspx?title=Parking+Tag+Application+-+Students&pid=ST-XWEPARK01';
+      window.open(redirectUrl, '_blank');
+    };
+
+  
 
   return (
     <Container maxWidth="sm">

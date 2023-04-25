@@ -8,7 +8,6 @@ import History from "scenes/history";
 import ParkingTag from "scenes/parkingTag";
 import Vehicles from "scenes/vehicles";
 import Home from "./scenes/home";
-import Messages from "./pages/Messages";
 import Notifications from "./pages/Notification.jsx";
 import Navbar from "./components/Navbar";
 import Login from "./scenes/login";
@@ -20,6 +19,7 @@ import Admin from "pages/Admin";
 import parkingActions from "pages/parkingActions";
 import Security from "pages/Security";
 import ParkingTagPage from "pages/parkingActions";
+import Security from "pages/Security";
 import HomeProtector from "components/homeProtector";
 import CreateNotification from "pages/CreateNotification";
 
@@ -59,7 +59,7 @@ function App() {
             {/*<Route path="/messages" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Messages />
-            </ProtectedRoute>} />*/}
+            </ProtectedRoute>} />
 
             {/* Notifications Route is Protected */}
             {/* <Route path="/notifications" element={
