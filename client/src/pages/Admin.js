@@ -59,6 +59,7 @@ const Admin = () => {
         try {
             const response = await axios.get(`${BASE_URL}/getAllNotifications`)
             setNotifications(response.data);
+            console.log(response.data);
         } catch (error) {
             console.log(error.message);
         }

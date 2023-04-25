@@ -9,20 +9,19 @@ import { BASE_URL } from "components/url";
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [notificationText, setNotificationText] = useState("");
-  const [notificationDate, setNotificationDate] = useState("");
+  const [notificationTitle, setNotificationTitle] = useState("");
   const user = useSelector((state) => state.user);
 
 
   const fetchNotifications = async () => {
-        try {
-          const response = await axios.get(`${BASE_URL}/notifications/${user.userID}`);
-          setNotifications(response.data);
-          console.log(response.data);
-        } catch (error) {
-          console.error('Error fetching notifications:', error);
-        }
-  };
-
+    try {
+      const response = await axios.get(`${BASE_URL}/getAllNotifications`)
+      setNotifications(response.data);
+      console.log(response.data);
+  } catch (error) {
+      console.log(error.message);
+  }
+}
 
   useEffect(() => {
         fetchNotifications();
@@ -31,8 +30,8 @@ const Notifications = () => {
 
   const handleDelete = async (notificationID) => {
         try {
-          await axios.delete(`${BASE_URL}/deleteNotification/${notificationID}`);
-          setNotifications(notifications.filter((n) => n.notificationID !== notificationID));
+          await axios.delete(`${BASE_URL}/deleteNotification`, {data: {id: notificationID}});
+          fetchNotifications();
         } catch (error) {
           console.error('Error deleting notification:', error);
         }
@@ -44,26 +43,22 @@ const Notifications = () => {
   };
 
 
-  const handleNotificationDateChange = (event) => {
-        setNotificationDate(event.target.value);
+  const handleNotificationTitleChange = (event) => {
+        setNotificationTitle(event.target.value);
   };
 
 
   const handleSubmit = async (event) => {
         event.preventDefault();
 
-
-        const notificationData = {
-          notificationText: notificationText,
-          notificationDate: notificationDate,
-          userType: user.userRole
-        };
-
-
         try {
-          await axios.post(`${BASE_URL}/addNotification`, notificationData);
+          await axios.post(`${BASE_URL}/createNotifications`, {
+            title: notificationTitle,
+            content: notificationText,
+            userID: user.userID
+          });
           setNotificationText("");
-          setNotificationDate("");
+          setNotificationTitle("");
           fetchNotifications();
         } catch (error) {
           console.error('Error adding notification:', error);
@@ -88,8 +83,8 @@ const Notifications = () => {
           </List>
           {user.userType === "admin" || user.userType === "security" ? (
             <form onSubmit={handleSubmit}>
+              <TextField label="Notification Title" value={notificationTitle} onChange={handleNotificationTitleChange} />
               <TextField label="Notification Text" value={notificationText} onChange={handleNotificationTextChange} />
-              <TextField label="Notification Date" value={notificationDate} onChange={handleNotificationDateChange} />
               <Button type="submit" variant="submit" >Submit</Button>
             </form>
           ) : null}
