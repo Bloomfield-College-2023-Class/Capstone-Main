@@ -16,8 +16,6 @@ import PersonalInformation from "pages/personalInformation";
 import Settings from "pages/Settings"
 import Profile from "pages/Profile"
 import Admin from "pages/Admin";
-import parkingActions from "pages/parkingActions";
-import Security from "pages/Security";
 import ParkingTagPage from "pages/parkingActions";
 import Security from "pages/Security";
 import HomeProtector from "components/homeProtector";

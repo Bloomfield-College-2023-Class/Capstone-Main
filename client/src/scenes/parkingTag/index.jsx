@@ -116,6 +116,11 @@ const ParkingTag = () => {
       <Button variant="contained" color="primary" onClick={() => setAdd(!addTag)}>
         Purchase
       </Button>
+
+      <Button variant="contained" color="primary" onClick={() => handleRedirect()}>
+        Bloomfield redirect
+      </Button>
+
       {addTag ? (
         <Box>
           <form>
