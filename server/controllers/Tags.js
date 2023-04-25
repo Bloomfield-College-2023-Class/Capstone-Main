@@ -2,10 +2,10 @@ import Tag from "../models/TagModel.js";
 
 export const getTags = async (req, res) => {
     try {
-      const Tag = await Tag.findAll({
+      const Tags = await Tag.findAll({
         attributes: ["tagID", "userID", "expirationDate", "effectiveDate"],
       });
-      res.json(Tag);
+      res.json(Tags);
     } catch (error) {
       console.log(error);
     }

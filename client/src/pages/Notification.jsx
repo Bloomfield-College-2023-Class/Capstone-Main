@@ -10,13 +10,12 @@ const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [notificationText, setNotificationText] = useState("");
   const [notificationDate, setNotificationDate] = useState("");
-  const userRole = useSelector((state) => state.user.role);
-  const userID = useSelector((state) => state.user.userID);
+  const user = useSelector((state) => state.user);
 
 
   const fetchNotifications = async () => {
         try {
-          const response = await axios.get(`${BASE_URL}/notifications/${userID}`);
+          const response = await axios.get(`${BASE_URL}/notifications/${user.userID}`);
           setNotifications(response.data);
           console.log(response.data);
         } catch (error) {
@@ -57,7 +56,7 @@ const Notifications = () => {
         const notificationData = {
           notificationText: notificationText,
           notificationDate: notificationDate,
-          userRole: userRole
+          userType: user.userRole
         };
 
 
@@ -87,11 +86,11 @@ const Notifications = () => {
               </ListItem>
             ))}
           </List>
-          {userRole === "Admin" || userRole === "Security" ? (
+          {user.userType === "admin" || user.userType === "security" ? (
             <form onSubmit={handleSubmit}>
               <TextField label="Notification Text" value={notificationText} onChange={handleNotificationTextChange} />
               <TextField label="Notification Date" value={notificationDate} onChange={handleNotificationDateChange} />
-              <Button type="submit" variant="submit" />
+              <Button type="submit" variant="submit" >Submit</Button>
             </form>
           ) : null}
         </Container>

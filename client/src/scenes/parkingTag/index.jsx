@@ -65,7 +65,7 @@ const ParkingTag = () => {
       console.log(response.data[0].effectiveDate)
       verify();
     } catch(error) {
-      alert(error.message);
+      console.log(error.message);
     }
   }
 

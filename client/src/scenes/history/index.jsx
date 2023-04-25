@@ -33,7 +33,7 @@ const History = () => {
       });
       await dispatch(setCars(response.data));
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 
@@ -46,7 +46,7 @@ const History = () => {
         dispatch(addParked(response.data));
       }
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 

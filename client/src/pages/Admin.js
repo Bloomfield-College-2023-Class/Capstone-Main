@@ -30,7 +30,7 @@ const Admin = () => {
             const response = await axios.get(`${BASE_URL}/users`);
             setUsers(response.data);
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     };
 
@@ -39,7 +39,7 @@ const Admin = () => {
             const response = await axios.get(`${BASE_URL}/getCars`);
             setCarList(response.data);
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     }
 
@@ -48,7 +48,7 @@ const Admin = () => {
             const response = await axios.get(`${BASE_URL}/getLots`);
             setLotList(response.data);
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     }
 
@@ -57,7 +57,7 @@ const Admin = () => {
             const response = await axios.get(`${BASE_URL}/getAllNotifications`)
             setNotifications(response.data);
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     }
 
@@ -66,7 +66,7 @@ const Admin = () => {
             const response = await axios.get(`${BASE_URL}/getAllParked`)
             setParkedCarsList(response.data);
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     }
 
@@ -75,7 +75,7 @@ const Admin = () => {
             const response = await axios.get(`${BASE_URL}/getTags`)
             setTags(response.data);
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     }
 

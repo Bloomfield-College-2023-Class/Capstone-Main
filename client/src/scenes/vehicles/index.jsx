@@ -23,7 +23,7 @@ const Vehicles = () => {
       dispatch(setCars(response.data));
       console.log("end3", Car);
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   }, [userID, dispatch]);
 
@@ -39,7 +39,7 @@ const Vehicles = () => {
       setOpenForm(false);
       fetchCars();
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 
