@@ -85,11 +85,6 @@ function App() {
                 <PersonalInformation />
               </ProtectedRoute> } />
 
-              <Route path="/settings" element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <Settings />
-              </ProtectedRoute> } />
-
               <Route path="/profile" element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Profile />
@@ -111,7 +106,6 @@ function App() {
             <Route path="/parkingTag" element={<ParkingTag />} />
             <Route path="/vehicles" element={<Vehicles />} />
             <Route path="/personalinformation" element={<PersonalInformation />} />
-            <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/createnotification" element={<CreateNotification />} />

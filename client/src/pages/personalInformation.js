@@ -17,7 +17,7 @@ const PersonalInformation = () => {
     const [password2, setPassword2] = useState('');
     const [email, setEmail] = useState(user.email);
     const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-    const [userName, setUserName] = useState(user.username);
+    const [userName, setUserName] = useState(user.userName);
 
     const updateUser = async () => {
         if (password == password2) {

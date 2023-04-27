@@ -93,10 +93,7 @@ const History = () => {
                     <TableCell>{y.timeEntered}</TableCell>
                     <TableCell>{y.timeExited}</TableCell>
                     <TableCell>
-                      {DateTime.fromISO(y.timeExited)
-                        .diff(DateTime.fromISO(y.timeEntered, "months"))
-                        .shiftTo("hours")
-                        .toString()}
+                      {DateTime.fromISO(y.timeExited).diff(DateTime.fromISO(y.timeEntered, 'months')).shiftTo('hours').toString()}
                     </TableCell>
                   </TableRow>
                 ))

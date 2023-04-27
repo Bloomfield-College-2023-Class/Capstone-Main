@@ -54,8 +54,8 @@ router.get('/getLots', getParking);
 router.patch('/updateLot', updateParking);
 
 //Cards
-router.get('getCards', getCards);
-router.patch('updateCard', updateCard);
-router.delete('deleteCard', deleteCard);
+router.get('/getCards', getCards);
+router.patch('/updateCard', updateCard);
+router.delete('/deleteCard', deleteCard);
 
 export default router;

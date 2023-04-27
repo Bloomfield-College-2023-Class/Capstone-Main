@@ -1,7 +1,7 @@
 import db from "../config/database.js";
 
 const Card = db.define('cards', {
-  userID: {
+  rfid: {
     type: db.Sequelize.STRING,
     allowNull: false,
     primaryKey: true

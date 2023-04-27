@@ -4,7 +4,7 @@ import Car from "../models/CarModel.js";
 export const getCars = async (req, res) => {
   try {
     const car = await Car.findAll({
-      attributes: ["carID", "userID", "color", "make", "model", "licensePlate"],
+      attributes: ["carID", "userID", "color", "make", "model", "licensePlate", "selected"],
     });
     res.json(car);
   } catch (error) {
@@ -12,13 +12,13 @@ export const getCars = async (req, res) => {
   }
 };
 
-export const getCarsbyID = async (req, res) => {
+export const getCarsbyID = async (req, res) => {  
   try {
     const cars = await Car.findAll({
       where: {
         userID: req.body.userID,
       },
-      attributes: ["carID", "userID", "color", "make", "model", "licensePlate"],
+      attributes: ["carID", "userID", "color", "make", "model", "licensePlate", "selected"],
     });
     console.log("here");
     if (cars.length === 0) {
@@ -34,17 +34,25 @@ export const getCarsbyID = async (req, res) => {
 
 export const updateCar = async (req, res) => {
   try {
-    const { carID, userID, make, model, licensePlate } = req.body;
+    const { carID, userID, make, model, licensePlate, selected } = req.body;
     let updatedCar = {
       carID,
       userID,
       make,
       model,
       licensePlate,
+      selected
     };
 
+    
     const car = await Car.findOne({ where: { carID } });
     if (!car) return res.status(404).json({ msg: "Car not found" });
+
+
+    if (selected == true) {
+      await Car.update({ selected: false}, {where: {userID}})
+    }
+    
     await Car.update(updatedCar, { where: { carID } });
     return res.json({ msg: "Car updated successfully" });
   } catch (error) {
@@ -55,7 +63,7 @@ export const updateCar = async (req, res) => {
 
 export const Import = async (req, res) => {
   // Get the fields that we are going to register
-  const { userID, color, make, model, licensePlate } = req.body;
+  const { userID, color, make, model, licensePlate, selected } = req.body;
 
   try {
     // Update table
@@ -65,6 +73,7 @@ export const Import = async (req, res) => {
       make: make,
       model: model,
       licensePlate: licensePlate,
+      selected: selected
     });
     res.json({ msg: "success import" }); // send a response indicating success
   } catch (error) {
@@ -80,7 +89,7 @@ export const getCarByLicensePlate = async (req, res) => {
       where: {
         licensePlate: req.query.licensePlate,
       },
-      attributes: ["carID", "userID", "color", "make", "model", "licensePlate"],
+      attributes: ["carID", "userID", "color", "make", "model", "licensePlate", "selected"],
     });
     if (!car) return res.status(404).json({ msg: "Car not found" });
     res.json(car);

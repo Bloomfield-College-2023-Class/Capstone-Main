@@ -28,6 +28,10 @@ const Car = db.define('car', {
     licensePlate: {
         type: db.Sequelize.STRING,
         allowNull: false
+    },
+    selected: {
+        type: db.Sequelize.BOOLEAN,
+        allowNull: true
     }
 }, {
     tableName: 'car'

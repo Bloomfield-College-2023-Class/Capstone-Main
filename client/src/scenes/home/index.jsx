@@ -35,9 +35,9 @@ const Home = () => {
             color: "hsl(111, 70%, 50%)",
           },
           {
-            id: "Total",
-            label: "Total",
-            value: 30,
+            id: "occupied",
+            label: "occupied",
+            value: 30 - parkingLot[0].numberOfSpots,
             color: "hsl(214, 70%, 50%)",
           },
         ]
@@ -53,9 +53,9 @@ const Home = () => {
             color: "hsl(111, 70%, 50%)",
           },
           {
-            id: "Total",
-            label: "Total",
-            value: 30,
+            id: "occupied",
+            label: "occupied",
+            value: 30 - parkingLot[1].numberOfSpots,
             color: "hsl(214, 70%, 50%)",
           },
         ]
@@ -65,15 +65,15 @@ const Home = () => {
     parkingLot.length > 2
       ? [
           {
-            id: "Total",
-            label: "Total",
+            id: "free",
+            label: "free",
             value: parkingLot[2].numberOfSpots,
             color: "hsl(111, 70%, 50%)",
           },
           {
-            id: "used",
-            label: "Used",
-            value: 30,
+            id: "occupied",
+            label: "occupied",
+            value: 30 - parkingLot[2].numberOfSpots,
             color: "hsl(214, 70%, 50%)",
           },
         ]

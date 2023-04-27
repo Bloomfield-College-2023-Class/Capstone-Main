@@ -118,7 +118,8 @@ const Admin = () => {
                 color: selectedCar.color,
                 make: selectedCar.make,
                 model: selectedCar.model,
-                licensePlate: selectedCar.licensePlate
+                licensePlate: selectedCar.licensePlate,
+                selected: selectedCar.selected
             })
             alert("update successful")
             fillCars();
@@ -190,7 +191,7 @@ const Admin = () => {
         try {
             const response = await axios.patch(`${BASE_URL}/updateCard`, {
                 rfid: selectedCard.rfid,
-                userID: selectedTag.userID
+                userID: selectedCard.userID
             })
             alert("update successful")
             fillCards()
@@ -350,11 +351,6 @@ const Admin = () => {
                                                         Select
                                                     </Button>
                                                 </TableCell>
-                                                <TableCell>
-                                                    <Button variant="contained" color="primary" onClick={() => handleUserClick(user)}>
-                                                        Select
-                                                    </Button>
-                                                </TableCell>
                                             </TableRow>
                                         ))
                                     ) : (
@@ -484,6 +480,7 @@ const Admin = () => {
                     <TableCell>Make</TableCell>
                     <TableCell>Model</TableCell>
                     <TableCell>License</TableCell>
+                    <TableCell>Selected</TableCell>
                     <TableCell>Select</TableCell>
                     </TableRow>
                 </TableHead>
@@ -491,11 +488,13 @@ const Admin = () => {
                     {carList ? (
                     carList.map((car) => (
                         <TableRow key={car.carID}>
+                        <TableCell>{car.carID}</TableCell>
                         <TableCell>{car.userID}</TableCell>
                         <TableCell>{car.color}</TableCell>
                         <TableCell>{car.make}</TableCell>
                         <TableCell>{car.model}</TableCell>
                         <TableCell>{car.licensePlate}</TableCell>
+                        <TableCell>{car.selected}</TableCell>
                         <TableCell>
                             <Button onClick={() => handleCarClick(car)} variant="contained" color="primary">
                             Select
@@ -522,6 +521,7 @@ const Admin = () => {
                         <TableCell>Make</TableCell>
                         <TableCell>Model</TableCell>
                         <TableCell>License</TableCell>
+                        <TableCell>selected</TableCell>
                         <TableCell>Update</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>
@@ -546,6 +546,9 @@ const Admin = () => {
                         <TableCell>
                         <TextField type="text" className="input" value={selectedCar.licensePlate} onChange={(e) => setSelectedCar({ ...selectedCar, licensePlate: e.target.value })} />
                         </TableCell>
+                        <Tablecell>
+                        <TextField type="text" className="input" value={selectedCar.selected} onChange={(e) => setSelectedCar({ ...selectedCar, selected: e.target.value })} />
+                        </Tablecell>
                         <TableCell>
                         <Button onClick={() => updateCar()} variant="contained" color="primary">
                             Update
@@ -894,6 +897,7 @@ const Admin = () => {
         <TableRow>
         <TableCell>RFID</TableCell>
         <TableCell>User ID</TableCell>
+        <TableCell>Select</TableCell>
         </TableRow>
     </TableHead>
     <TableBody>
@@ -929,7 +933,7 @@ const Admin = () => {
         <TableBody>
         <TableRow>
             <TableCell>
-            <TextField type="text" className="input" value={selectedCard.RFID} onChange={(e) => setSelectedCard({ ...selectedCard, rfid: e.target.value })} />
+            <TextField type="text" className="input" value={selectedCard.rfid} onChange={(e) => setSelectedCard({ ...selectedCard, rfid: e.target.value })} />
             </TableCell>
             <TableCell>
             <TextField type="text" className="input" value={selectedCard.userID} onChange={(e) => setSelectedCard({ ...selectedCard, userID: e.target.value })} />

@@ -33,6 +33,7 @@ export const Register = async (req, res) => {
   //Hash passwords
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
+  console.log(hashPassword);
 
   try {
     // create a new user

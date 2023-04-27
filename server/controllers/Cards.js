@@ -22,7 +22,7 @@ export const updateCard = async (req, res) => {
       };
       const card = await Card.findOne({ where: { rfid } }); //get current user we are trying to change based on the id
       if (!card) return res.status(404).json({ msg: "Card not found" }); //send error if not found
-      await User.update(updatedCard, { where: { rfid } }); //update the user
+      await Card.update(updatedCard, { where: { rfid } }); //update the user
       return res.json({ msg: "Card updated successfully" }); //send success message
     } catch (error) {
       console.log(error);

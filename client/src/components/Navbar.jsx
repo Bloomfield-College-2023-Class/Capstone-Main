@@ -70,11 +70,6 @@ const Navbar = ({ isLoggedIn }) => {
               <AccountBox />
               Profile
             </IconButton>
-            {/* Settings */}
-            <IconButton color="inherit" component={Link} to="/settings" sx={{marginRight: '20px'}}>
-              <Settings />
-              Settings
-            </IconButton>
             {/* Set the theme */}
 
             <IconButton onClick={() => dispatch(setMode())}>
