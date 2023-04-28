@@ -111,7 +111,7 @@ const History = () => {
 };
 
 //Helper function to convert seconds to hours, minutes, seconds
-function formatTime( seconds ) {
+function formatTime( date ) {
   const hours = Math.floor(durationInSeconds / 3600);
   const minutes = Math.floor((durationInSeconds % 3600) / 60);
   const seconds = durationInSeconds % 60;
