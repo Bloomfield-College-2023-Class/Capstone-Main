@@ -8,6 +8,7 @@ import {
   TextField,
   Button,
 } from '@mui/material';
+import { BASE_URL } from 'components/url';
 
 const PersonalInformation = () => {
     const user = useSelector((state) => state.user);
