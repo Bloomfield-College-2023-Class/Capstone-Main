@@ -823,6 +823,7 @@ const Admin = () => {
         {tags ? (
         tags.map((tag) => (
             <TableRow key={tag.tagID}>
+            <TableCell>{tag.tagID}</TableCell>
             <TableCell>{tag.userID}</TableCell>
             <TableCell>{tag.effectiveDate}</TableCell>
             <TableCell>{tag.expirationDate}</TableCell>
