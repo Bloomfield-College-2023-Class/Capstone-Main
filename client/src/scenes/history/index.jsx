@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { DateTime } from "luxon";
 import axios from "axios";
 import { setCars, addParked } from "../../state/index.js";
 import {
@@ -72,7 +71,9 @@ const History = () => {
 
   return (
     <Container>
-      <Typography variant="h2" sx={{margin: "15px"}}>History</Typography>
+      <Typography variant="h2" sx={{ margin: "15px" }}>
+        History
+      </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -85,34 +86,40 @@ const History = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {ParkedCars
-              ? ParkedCars.map((y) => (
-                  <TableRow key={y.carID}>
-                    <TableCell>{y.carID}</TableCell>
-                    <TableCell>{y.parkingLotID}</TableCell>
-                    <TableCell>{y.timeEntered}</TableCell>
-                    <TableCell>{y.timeExited}</TableCell>
-                    <TableCell>
-                      {DateTime.fromISO(y.timeExited).diff(DateTime.fromISO(y.timeEntered, 'months')).shiftTo('hours').toString()}
-                    </TableCell>
-                  </TableRow>
-                ))
-              : (
-                  <TableRow>
-                    <TableCell>No History</TableCell>
-                  </TableRow>
-                )}
+            {ParkedCars ? (
+              ParkedCars.map((y) => (
+                <TableRow key={y.carID}>
+                  <TableCell>{y.carID}</TableCell>
+                  <TableCell>{y.parkingLotID}</TableCell>
+                  <TableCell>{y.timeEntered}</TableCell>
+                  <TableCell>{y.timeExited}</TableCell>
+                  <TableCell>
+                    {formatTime(Math.floor((new Date(y.timeExited) - new Date(y.timeEntered)) / 1000))}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>No History</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
-      </TableContainer> 
+      </TableContainer>
     </Container>
   );
 };
 
+//Helper function to convert seconds to hours, minutes, seconds
+function formatTime( date ) {
+  const hours = Math.floor(date / 3600);
+  const minutes = Math.floor((date % 3600) / 60);
+  const seconds = date % 60;
+
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
 export default History;
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -130,7 +137,6 @@ export default History;
 //   Paper,
 //   Button,
 // } from '@mui/material';
-
 
 // const History = () => {
 
@@ -187,7 +193,6 @@ export default History;
 //         console.log("parkedcars changed:", parkedCars)
 //     }, [parkedCars])
 
-    
 //     useEffect(() => {
 //         async function fetchData() {
 //             try {
@@ -199,10 +204,10 @@ export default History;
 //                 alert(error.message);
 //             }
 //         }
-        
+
 //         fetchData();
 //     }, [userID]);
-    
+
 //     useEffect(() => {
 //         async function fetchpt2() {
 //             try {
@@ -264,7 +269,7 @@ export default History;
 //         </Button>
 //       </div>
 //     );
-    
+
 // }
 
 // export default History;
@@ -289,13 +294,13 @@ export default History;
 //                           <td>{ y.parkingLotID }</td>
 //                           <td>{ y.timeEntered }</td>
 //                           <td>{ y.timeExited }</td>
-//                           <td>{ 
+//                           <td>{
 //                               DateTime.fromISO(y.timeExited).diff(DateTime.fromISO(y.timeEntered, 'months')).shiftTo('hours').toString()
 //                           }</td>
 //                           <td></td>
 //                       </tr>
 //                   )
-//               }) : 
+//               }) :
 //               <tr>
 //                   <td>No History</td>
 //               </tr>}
