@@ -546,9 +546,9 @@ const Admin = () => {
                         <TableCell>
                         <TextField type="text" className="input" value={selectedCar.licensePlate} onChange={(e) => setSelectedCar({ ...selectedCar, licensePlate: e.target.value })} />
                         </TableCell>
-                        <Tablecell>
+                        <TableCell>
                         <TextField type="text" className="input" value={selectedCar.selected} onChange={(e) => setSelectedCar({ ...selectedCar, selected: e.target.value })} />
-                        </Tablecell>
+                        </TableCell>
                         <TableCell>
                         <Button onClick={() => updateCar()} variant="contained" color="primary">
                             Update
